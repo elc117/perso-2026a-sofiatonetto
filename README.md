@@ -27,6 +27,8 @@ Toda a lógica de relação dos horários e da disponibilidade dos bolsistas ser
 
 Eu já tinha comecado a desenvolver o front-end do sistema para o laboratório, pois vou implementar esse sistema realmente, então pensei em propor uma parte das funcionalidades do sistema para o trabalho, as escolhidas foram o cadastro dos bolsistas e a geracao da escala de trabalho a partir da proximidade das linhas de pesquisa e dos horários livres dos bolsistas de cada projeto. A ideia inicial era utilizar uma API do gemini para fazer a alocação dos horários, pois já tinha pensando nisso  mas, conversando com a professora, percebeu-se que seria mais fácil apenas implementar um algoritmo de proximidade/similaridade para comparar e gerar a escala.
 
+A primeira decisao foi no armazenamento das grades, pois a ideia seria que a professora fizesse o upload das fotos dos horários de todos os alunos, mas não sei como fazer isso em Haskell então a maneira que pensei para solucionar isso foi a modificacao do formulário de cadastro para que ao invés de fazer o upload da foto da grade, a professora terá que marcar os horários livres dos alunos.
+
 - como a ideia inicial evoluiu (ok)
 
   A fazer: (tudo a partir daqui)
