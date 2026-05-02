@@ -16,7 +16,7 @@ As funcionalidades pensadas são:
 * POST/bolsistas: Cadastra um novo bolsista no sistema, onde são marcados os horários que ele tem disponível;
 * GET/bolsistas: Lista todos os bolsistas e suas grades de horários; 
 * GET/conflitos: Processa as grades e retorna a disponibilidade dos bolsistas; 
-*POST/bolsistas/:id/grade: Edita a grade de horários de um bolsista para o semestre atual; <br>
+* POST/bolsistas/:id/grade: Edita a grade de horários de um bolsista para o semestre atual; <br>
 Essas informações são armazenadas em um banco de dados relacional. 
 Toda a lógica de relação dos horários e da disponibilidade dos bolsistas será implementada com funções puras, recebendo os horários e retornando a escala de trabalho sem alterar os dados de entrada, pois cria listas temporárias para processar as info. Utilizando funções de alta ordem para filtrar e alocar corretamente os bolsistas e seus horários. 
 
