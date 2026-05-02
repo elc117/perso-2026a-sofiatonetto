@@ -104,15 +104,14 @@ Inclua **de 3 a 5 interações relevantes** com ferramentas de IA.
 - **Trecho do prompt ou resumo fiel:**  "poderia me ajudar a deixar cada elemento em uma linha ajustando o markdown que colocarei no README do mwu github: --> POST/bolsistas: Cadastra um novo bolsista no sistema, onde são marcados os horários que ele tem disponível; --> GET/bolsistas: Lista todos os bolsistas e suas grades de horários; --> GET/conflitos: Processa as grades e retorna a disponibilidade dos bolsistas; --> POST/bolsistas/:id/grade: Edita a grade de horários de um bolsista para o semestre atual;"
 - **O que foi aproveitado:**  copiei e colei essa tag no meu código "br" e os asteriscos com a retirada das setas.
 - **O que foi modificado ou descartado:**
-"Usar o <br> (Quebra de linha forçada) Se você quer que o texto fique colado na lista, mas na linha de baixo (sem aquele espaço vazio de um parágrafo novo), use a tag <br> ao final da última linha:
-Markdown
-* **POST /bolsistas**: Cadastra um novo bolsista.
-* **GET /bolsistas**: Lista os bolsistas.
-* **GET /conflitos**: Retorna a disponibilidade.
-* **POST /bolsistas/:id/grade**: Edita a grade.<br>
+"Usar o <br> (Quebra de linha forçada) Se você quer que o texto fique colado na lista, mas na linha de baixo (sem aquele espaço vazio de um parágrafo novo), use a tag <br> ao final da última linha: Markdown
+    * **POST /bolsistas**: Cadastra um novo bolsista.
+    * **GET /bolsistas**: Lista os bolsistas.
+    * **GET /conflitos**: Retorna a disponibilidade.
+    * **POST /bolsistas/:id/grade**: Edita a grade.<br>
 Aqui o texto aparece imediatamente na linha de baixo, sem o espaço de um parágrafo"
 
-Esse foi o resultado que ele me deu, mas não queria o bold e ele retirou parte das minhas frases que tinha enviado no email da proposta e passei para o tópico dois, então só aproveitei os * e o <br>
+Esse foi o resultado que ele me deu, mas não queria o bold e ele retirou parte das minhas frases que tinha enviado no email da proposta e passei para o tópico dois, então só aproveitei os * e o "br"
 
 #### Interação 2
 
@@ -173,6 +172,9 @@ Você pode comentar, por exemplo:
 ---
 
 ## 9. Referências e créditos
+
+- email de avaliacao da proposta com passos fornecidos pela professora;
+- material da aula 11 (06/04) sobre Scotty -> https://liascript.github.io/course/?https://raw.githubusercontent.com/AndreaInfUFSM/elc117-2026a/main/classes/11/README.md
 
 Liste referências e créditos de forma detalhada, com título e URL, incluindo, quando aplicável:
 
