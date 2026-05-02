@@ -13,10 +13,10 @@ Sistema para cadastro e alocação de bolsistas.
 O laboratório que trabalho possui diversos bolsistas e quando é necessário ajustar os horários de trabalho de cada um deles fica complicado por ser um processo muito manual. Por isso a ideia desenvolvida é um serviço web para centralizar e automatizar a gestão de horários. Sendo permito o cadastro de bolsistas com sua grade de horário correspondente ao semestre atual para identificar os horários livres que esse bolsista possui e, assim, verificar e combinar com os horários dos outros estudantes. 
 
 As funcionalidades pensadas são: 
- --> POST/bolsistas: Cadastra um novo bolsista no sistema, onde são marcados os horários que ele tem disponível;
- --> GET/bolsistas: Lista todos os bolsistas e suas grades de horários; 
- --> GET/conflitos: Processa as grades e retorna a disponibilidade dos bolsistas; 
- --> POST/bolsistas/:id/grade: Edita a grade de horários de um bolsista para o semestre atual; 
+ \--> POST/bolsistas: Cadastra um novo bolsista no sistema, onde são marcados os horários que ele tem disponível;
+ \--> GET/bolsistas: Lista todos os bolsistas e suas grades de horários; 
+ \--> GET/conflitos: Processa as grades e retorna a disponibilidade dos bolsistas; 
+ \--> POST/bolsistas/:id/grade: Edita a grade de horários de um bolsista para o semestre atual; 
 Essas informações são armazenadas em um banco de dados relacional. 
 Toda a lógica de relação dos horários e da disponibilidade dos bolsistas será implementada com funções puras, recebendo os horários e retornando a escala de trabalho sem alterar os dados de entrada, pois cria listas temporárias para processar as info. Utilizando funções de alta ordem para filtrar e alocar corretamente os bolsistas e seus horários. 
 
