@@ -16,7 +16,8 @@ As funcionalidades pensadas são:
 * POST/bolsistas: Cadastra um novo bolsista no sistema, onde são marcados os horários que ele tem disponível;
 * GET/bolsistas: Lista todos os bolsistas e suas grades de horários; 
 * GET/conflitos: Processa as grades e retorna a disponibilidade dos bolsistas; 
-* POST/bolsistas/:id/grade: Edita a grade de horários de um bolsista para o semestre atual; <br>
+* POST/bolsistas/:id/grade: Edita a grade de horários de um bolsista para o semestre atual; 
+<br>
 Essas informações são armazenadas em um banco de dados relacional. 
 Toda a lógica de relação dos horários e da disponibilidade dos bolsistas será implementada com funções puras, recebendo os horários e retornando a escala de trabalho sem alterar os dados de entrada, pois cria listas temporárias para processar as info. Utilizando funções de alta ordem para filtrar e alocar corretamente os bolsistas e seus horários. 
 
@@ -84,7 +85,9 @@ Você também pode acrescentar uma breve explicação sobre o que está sendo de
 
 ## 8. Uso de IA 
 
-### 8.1 Ferramentas de IA utilizadas
+### 8.1 Ferramentas de IA utilizadas 
+
+* Gemini 3 Flash Free modo rápido;
 
 Liste as principais ferramentas de IA utilizadas, com suas versões/modelos/planos. Por exemplo, ChatGPT Free com GPT-5.2 Thinking, GitHub Copilot com Gemini 2.0 Flash, Antigravity com Claude Sonnet 4.6 (Thinking), etc.
 
@@ -146,6 +149,8 @@ Explique brevemente o que aconteceu e como você percebeu ou corrigiu o problema
 ---
 
 ### 8.4 Comentário pessoal sobre o processo envolvendo IA
+
+* utilizei a IA do gemini 3 Flash Free para me ajudar a configurar o markdown, pois estava com dificuldade de deixar a setas uma embaixo da outra.
 
 Escreva um breve comentário pessoal sobre o processo envolvendo IA.
 
