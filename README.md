@@ -243,3 +243,5 @@ Bom, antes de comecar a implementar as funções, perguntei para o claude como e
 - material da aula 8 para uso do where -> https://liascript.github.io/course/?https://raw.githubusercontent.com/AndreaInfUFSM/elc117-2026a/main/classes/08/README.md#1
 
 - para "editar" listas, ou seja, uso do 'map' para criar outra lista baseada na primeira, que, na minha cabeça, funciona como uma função de editar -> https://pt.wikibooks.org/wiki/Haskell/Listas_II
+
+- material utilizado para os teste -> https://github.com/elc117/haskell01-2026a-sofiatonetto
