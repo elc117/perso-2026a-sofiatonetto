@@ -29,7 +29,9 @@ Eu já tinha comecado a desenvolver o front-end do sistema para o laboratório, 
 
 A primeira decisao foi no armazenamento das grades, pois a ideia seria que a professora fizesse o upload das fotos dos horários de todos os alunos, mas não sei como fazer isso em Haskell então a maneira que pensei para solucionar isso foi a modificacao do formulário de cadastro para que ao invés de fazer o upload da foto da grade, a professora terá que marcar os horários livres dos alunos.
 
-Implementei toda a parte de cadastro, listagem e possibilidade de editar o bolsista, quando fui desenvolver a parte dos horários percebi que estava armazenando os horários errado, com o intervalo e o dia em que estão livres, então segunda livre 2h, por exeplo, mas dessa forma não saberia em qual hora do dia os bolsistas estariam livres para conseguir implementar o algoritmo de proximidade, então alterei a tabela Horarios no banco (ALTER TABLE producao.horarios ADD COLUMN hora_inicio integer not null;) para guardar o horário em que esse intervalo de trabalho começa.
+Implementei toda a parte de cadastro, listagem e possibilidade de editar o bolsista, quando fui desenvolver a parte dos horários percebi que estava armazenando os horários errado, com o intervalo e o dia em que estão livres, então segunda livre 2h, por exeplo, mas dessa forma não saberia em qual hora do dia os bolsistas estariam livres para conseguir implementar o algoritmo de proximidade, então alterei a tabela Horarios no banco (ALTER TABLE producao.horarios ADD COLUMN hora_inicio integer not null;) para guardar o horário em que esse intervalo de trabalho começa. 
+
+Na hora dos testes das funcionalidades de cadastro, encontrei erros na parte de declarar os tipos, fui pesquisar no navegador como ajustar e resolvi. Outra decisão foi a de seperar uma página para cada coisa, pois eu estava fazendo tudo junto, já tinha declarado os tipos do Horario no arquivo de Cadastro, mas decidi separar as funcionalidades. 
 
 - como a ideia inicial evoluiu (ok)
 
