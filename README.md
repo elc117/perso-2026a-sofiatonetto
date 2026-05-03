@@ -128,10 +128,104 @@ Esse foi o resultado que ele me deu, mas não queria o bold e ele retirou parte 
 
 #### Interação 3 
 
-- **Objetivo da consulta:**  
-- **Trecho do prompt ou resumo fiel:**  
-- **O que foi aproveitado:**  
-- **O que foi modificado ou descartado:**  
+- **Objetivo da consulta:** verificar se tinha algo que eu estava fazendo no meu código que não é considerado de bom uso em Haskell
+- **Trecho do prompt ou resumo fiel:**  mandei esse prompt para ele: "tenho esse código, poderia me dizer o que está em desacordo com o padrão da linguagem Haskell.
+module cadastro where 
+
+data Bolsistas = Bolsistas 
+{
+    matricula :: String,
+    nome :: String,
+    email :: String,
+    linha_pesquisa :: String,
+    horarios_livres :: String
+
+}
+
+data Horario = Horario
+{   
+    horarioId :: Int,
+    dia :: String,
+    intervalo :: Int,
+    matricula_bolsista :: String
+}
+
+matriculaCadastrada :: [Bolsistas] -> String -> Bool
+matriculaCadastrada bolsistas matricula =
+    length (filter(\b -> matricula b == matricula) bolsistas) > 0
+
+cadastrar :: [Bolsistas] -> String -> String -> String -> String -> String -> [Bolsistas]
+cadastrar bolsistas matricula nome email linha_pesquisa horarios_livres = bolsistas ++ [Bolsistas matricula nome email linha_pesquisa horarios_livres]
+    where
+        jaCadastrado = matriculaCadastrada bolsistas matricula
+
+editarBolsista :: [Bolsistas] -> String -> String -> [Bolsistas]
+editarBolsista bolsistas matricula nome_editado email_editado linha_pesquisa_editada horarios_livres_editado = map atualizaBolsista bolsistas
+    where
+        atualizaBolsista b = b { nome = nome_editado, email = email_editado, linha_pesquisa = linha_pesquisa_editada, horarios_livres = horarios_livres_editado}
+
+listarBolsistas :: [Bolsistas] -> [String]
+listarBolsistas bolsistas = map (\b ->  matricula b ++ " . " ++ nome b ++ " . " ++ email b ++ " . " ++ horarios_livres ++ " . " ++ linha_pesquisa b) Bolsistas
+
+buscarPorPesquisa :: [Bolsistas] -> String -> [Bolsistas]
+buscarPorPesquisa bolsistas linha_pesquisa = filter(\b -> linha_pesquisa b == linha_pesquisa) bolsistas
+
+buscaPorMatricula :: [Bolsistas] -> String -> [Bolsistas]
+buscaPorMatricula bolsistas matricula = filter(\b -> matricula b == matricula) bolsistas"
+- **O que foi aproveitado:** aproveitei para ajustar o nome das variáveis, pois, segundo ele, não é de bom tom utilizar um variável "linha_pesquisa", mas sim "linhaPesquisa";
+- **O que foi modificado ou descartado:**  ele me deu essa resposta - "Aqui estão os problemas encontrados:
+
+**1. Nome do módulo — deve começar com maiúscula:**
+```haskell
+-- errado
+module cadastro where
+-- certo
+module Cadastro where
+```
+
+**2. Nome do tipo no plural — convenção Haskell é singular:**
+```haskell
+-- errado
+data Bolsistas = Bolsistas
+-- certo
+data Bolsista = Bolsista
+```
+
+**3. snake_case nos campos — Haskell usa camelCase:**
+```haskell
+-- errado
+linha_pesquisa, horarios_livres, matricula_bolsista, nome_editado
+-- certo
+linhaPesquisa, horariosLivres, matriculaBolsista, nomeEditado
+```
+
+**4. Assinatura errada do `editarBolsista` — tem 6 parâmetros mas declara só 2:**
+```haskell
+-- errado
+editarBolsista :: [Bolsistas] -> String -> String -> [Bolsistas]
+-- certo
+editarBolsista :: [Bolsista] -> String -> String -> String -> String -> String -> [Bolsista]
+```
+
+**5. `listarBolsistas` — dois erros: `horarios_livres` sem o `b` e `Bolsistas` maiúsculo no final:**
+```haskell
+-- errado
+++ horarios_livres ++ ... ) Bolsistas
+-- certo
+++ horariosLivres b ++ ... ) bolsistas
+```
+
+**6. `matriculaCadastrada` — conflito de nome: o parâmetro `matricula` tem o mesmo nome que o campo:**
+```haskell
+-- errado
+matriculaCadastrada bolsistas matricula =
+    filter(\b -> matricula b == matricula)
+-- certo
+matriculaCadastrada bolsistas mat =
+    filter(\b -> matricula b == mat)
+```
+
+O mesmo problema acontece em `buscarPorPesquisa` e `buscaPorMatricula`."
 
 #### Interação 4 (opcional)
 
