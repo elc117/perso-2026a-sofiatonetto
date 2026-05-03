@@ -85,6 +85,21 @@ e não entendi, então voltei no material e não achei nada a respeito, pesquise
      
 Essa foram a funções testadas no Cadastro: matriculaCadastrada em que retorna True se a matrícula já foi cadastrada e False se não, neste primeiro caso já tinha sido, pois testei anteriormente a 'cadastrar' e já realizei o cadastro de Ana antes. <br> Testei elas com AssertEquals como aprendi em aula nos arquivos que a professora passou inicialmente e que, depois, tivemos que fazer os códigos, então peguei aqueles códigos de exemplo. <br> E a função de editar o bolsista, edita o bolsista com tal matrícula, atualizando, neste caso, o somnete o nome da pessoa. Mas depois de corrigir o HUnit e os tipos, não tive nenhum problema com as funções do cadastro.  
 
+Para o teste do Horario foi bem fácil, pois já estava tudo instalado então coloquei "ghci -package HUnit Cadastro.hs Horario.hs TestMyFunctionsh.hs" e depois ":module Horario". Meu terminal ficou assim com as funções que testei: 
+
+    ghci> intervaloFim (Horario 1 "segunda" 8.5 2.0 "202500101")
+    10.5
+    ghci> horasTotais [Horario 1 "segunda" 8.5 2.0 "202500101", Horario 2 "terca" 10.5 2.0 "202500101"] "202500101"
+    4.0
+    ghci> escalaBolsistas [Horario 1 "segunda" 8.5 2.0 "202500101", Horario 2 "segunda" 8.5 2.0 "202300202"] "segunda" 8.5
+    ["202500101","202300202"]
+    ghci> verificaCargaHoraria [Horario 1 "segunda" 8.5 2.0 "202500101"] "202500101"
+    False
+    ghci> verificaCargaHoraria [Horario 1 "segunda" 8.5 2.0 "202500101", Horario 2 "segunda" 10.5 2.0 "202500101", Horario 3 "terca" 8.5 2.0 "202500101", Horario 4 "terca" 10.5 2.0 "202500101", Horario 5 "quarta" 8.5 2.0 "202500101", Horario 6 "quarta" 10.5 2.0 "202500101"] "202500101"
+    True
+
+Isso significa que na última verificação a Ana fechou as 12h semanais obrigatórias para todos os bolsistas enquanto na primeira vez que verifiquei isso, ela só tinha 2h semanais, por isso retornou False na primeira e True na última. 
+A parte do intervaloFim é para mostrar que o intervalo de trabalho que começa às 08:30 (8.5) acaba às 10:30 (10.5). E as horasTotais representa o total de horas do bolsista em que coloco os intervalos que ele está livre para trabalhar.
 
 ---
 
