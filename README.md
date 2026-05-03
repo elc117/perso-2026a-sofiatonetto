@@ -34,6 +34,9 @@ Implementei toda a parte de cadastro, listagem e possibilidade de editar o bolsi
 Na hora dos testes das funcionalidades de cadastro, encontrei erros na parte de declarar os tipos, fui pesquisar no navegador como ajustar e resolvi. Outra decisão foi a de seperar uma página para cada coisa, pois eu estava fazendo tudo junto, já tinha declarado os tipos do Horario no arquivo de Cadastro, mas decidi separar as funcionalidades. Outra decisao foi a forma de armazenar as horas, pois não é 1h inteira, então alterei para guardar o tempo quebrado (ALTER TABLE producao.horarios ALTER COLUMN hora_inicio TYPE numeric;
 ALTER TABLE producao.horarios ALTER COLUMN intervalo TYPE numeric;). 
 
+Na parte dos horários tive dificuldade em "Bolsistas por Pesquisa" que é a principal funcionalidade do sistema, pois precisava verificar muitas coisas e acabei me confundidno e tive que fazer várias vezes até conseguir verificar exatamente o que precisava. 
+
+
 - como a ideia inicial evoluiu (ok)
 
   A fazer: (tudo a partir daqui)
@@ -46,10 +49,6 @@ ALTER TABLE producao.horarios ALTER COLUMN intervalo TYPE numeric;).
 - como você separou a lógica do serviço da parte ligada ao Scotty
 - quais funções puras e estruturas de dados foram importantes no trabalho
 - quais aspectos de programação funcional apareceram no desenvolvimento
-
-Este não é um espaço para escrever algo como "foi difícil mas superei as dificuldades". O objetivo é mostrar sinais reais de desenvolvimento, reflexão, aprendizado e resolução de problemas. 
-
-Se o desenvolvimento não conseguir atingir todos os objetivos e requisitos, essa seção é muito importante para mostrar o que você tentou.
 
 ---
 
