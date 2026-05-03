@@ -2,19 +2,17 @@
 module Database where 
 
 import Database.PostgreSQL.Simple
+import System.Environment (getEnv)
+import Data.ByteString.Char8 (pack)
 import Database.PostgreSQL.Simple.FromRow
 import Data.List.Split (splitOn)
 import Cadastro
 import Horario
 
 conectar :: IO Connection
-conectar = connect defaultConnectInfo
-  { connectHost     = "localhost"
-  , connectPort     = 5433
-  , connectDatabase = "lifa_hs"
-  , connectUser     = "postgres"
-  , connectPassword = "postgres"
-  }
+conectar = do
+  url <- getEnv "DATABASE_URL"
+  connectPostgreSQL (postgresql://lifa_hs_user:97Rc6wBX6tNO0RFm6Lz1Hzigii5oUC30@dpg-d7rtqrn7f7vs73d8unl0-a/lifa_hs)
 
 instance FromRow Bolsista where
   fromRow = Bolsista <$> field <*> field <*> field <*> field <*> field
