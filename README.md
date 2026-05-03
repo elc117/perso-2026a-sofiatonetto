@@ -58,7 +58,7 @@ Primeiro, instalei o ghc com o comando "sudo apt-get install ghc" e depois "ghci
     4 | {
       | ^
     Failed
-e não entendi, então voltei no material e não achei nada, então pesquisei no goole e fui nesse site (https://pt.wikibooks.org/wiki/Haskell/Declaração_de_tipos), consegui perceber que minha ',' estavam em lugares diferentes que no código mostrado, depois de alterar isso, instalei o HUnit com -> "sudo apt-get install libghc-hunit-dev", pois deu esse erro:
+e não entendi, então voltei no material e não achei nada a respeito, pesquisei no goole e fui nesse site (https://pt.wikibooks.org/wiki/Haskell/Declaração_de_tipos), consegui perceber que minha ',' estavam em lugares diferentes que no código mostrado, depois de alterar isso, instalei o HUnit com -> "sudo apt-get install libghc-hunit-dev", pois deu esse erro:
      <br> [1 of 3] Compiling Cadastro         ( Cadastro.hs, interpreted )
      <br> [2 of 3] Compiling Main             ( TestMyFunctions.hs, interpreted )
       
@@ -69,19 +69,23 @@ e não entendi, então voltei no material e não achei nada, então pesquisei no
       4 | import Test.HUnit
         | ^^^^^^^^^^^^^^^^^
       Failed, one module loaded.
-  <br> Depois disso, "ghci Cadastro.hs TesteMyFunctions.hs", então não deu nenhum erro. 
-
-
-Descreva brevemente como você lidou com os testes unitários das funções que implementam a lógica do serviço, independentemente do Scotty.
-
-Inclua, se necessário:
-
-- quais funções puras foram testadas;
-- como os testes foram organizados;
-- se você usou HUnit ou outro modo simples de teste;
-- exemplos curtos do que foi verificado.
-
-Lembre que não se trata de testar se o serviço funciona pela web, mas sim de testar as funções puras que implementam a lógica.
+  <br> Depois disso, "ghci ghci -package HUnit Cadastro.hs TestMyFunctions.hs" com HUnit
+                      GHCi, version 9.4.7: https://www.haskell.org/ghc/  :? for help
+                      [1 of 3] Compiling Cadastro         ( Cadastro.hs, interpreted )
+                      [2 of 3] Compiling Main             ( TestMyFunctions.hs, interpreted )
+                      Ok, two modules loaded.
+<br> Sem nenhum erro, comecei a testar algumas funções:
+      ghci> matriculaCadastrada [Bolsista "202500101" "Ana" "ana@gmail.com" "Machine Learning" "segunda 10:00 12:00"] "202500101"
+      True
+      ghci> matriculaCadastrada [Bolsista "202500101" "Ana" "ana@gmail.com" "Machine Learning" "segunda 10:00 12:00"] "999"
+      False
+      ghci> listarBolsistas [Bolsista "202500101" "Ana" "ana@gmail.com" "Machine Learning" "segunda 10:00 12:00"]
+      ["202500101 . Ana . ana@gmail.com . segunda 10:00 12:00 . Machine Learning"]
+      ghci> nome (head (editarBolsista [Bolsista "202500101" "Ana" "ana@gmail.com" "Machine Learning" "segunda 10:00 12:00"] "202500101" "Ana Silva" "ana@gmail.com" "Machine Learning" "segunda 10:00 12:00"))
+      "Ana Silva"
+      ghci> :q
+      Leaving GHCi."
+      <br> Essa foram a funções testadas: matriculaCadastrada em que retorna True se a matrícula já foi cadastrada e False se não, neste primeiro caso já tinha sido, pois testei anteriormente a 'cadastrar' e já realizei o cadastro de Ana antes. Testei elas com AssertEquals como aprendi em aula nos arquivos que a professora passou inicialmente e que, depois, tivemos que fazer os códigos, então peguei aqueles códigos de exemplo. E a função de editar o bolsista, edita o bolsista com tal matrícula, atualizando, neste caso, o somnete o nome da pessoa. Mas depois de corrigir o HUnit e os tipos, não tive nenhum problema com as funções do cadastro.  
 
 ---
 
