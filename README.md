@@ -332,7 +332,32 @@ Bom, antes de comecar a implementar as funções, perguntei para o claude como e
 
 * utilizei a claude sonnert 4.6 pro para me ajudar a identificar o que eu tinha escrito no meu código que estava fora do padrão de programação em Haskell.
 
-<br> Não copiei nenhum código de IA, até porque quando solicitei a ela uma maneira de implementar, ela me deu um código muito mais complexo do que tinha visto em aula, o que não me ajudou, mas me fez buscar no navegador formas para implementar os tipos em Haskell, que não tivemos em aual, então consegui aprender algo de diferente. Mas a IA fica muito fixa em fazer códigos que não estão de acordo com meu nível de conhecimento e por mais que isso poderia ajudar, acaba atrapalhando, pois não sei muito do básico ainda então acaba sendo mais complicado de compreender o que ela gera, pois mistura muita coisa e gera coisas "do além" como o 'deriving' que não sei como funciona.
+* Agora no fim, pedi uma última ajuda para a Cluade sonnert 4.6 pro, pois minha tabela sempre que eu adionava um novo bolsista a escala fazia uma nova tabela embaixo com o nome do novo bolsista, então nunca teria os horários fixos com os nomes dos bolsistas nos horários que trabalham, somente uma tabela de horário para cada bolsista, o que torna mais complicado de visualizar. Antes meu código era assim:
+  
+      geraEscala :: [Horario] -> [(String, Scientific, Scientific, [String])]
+        geraEscala horarios = map geraTabela horariosUnicos
+        where
+           horariosUnicos = nub (map (\h -> (dia h, horaInicio h)) horarios)
+           geraTabela (d, hi) = (d, hi, hi + 2.0, escalaBolsistas horarios d hi)
+
+  E a claude disse para mudar para isso:
+
+      geraEscala :: [Horario] -> [(String, Scientific, Scientific, [String])]
+      geraEscala horarios =
+          map geraTabela horariosUnicos
+          where
+            diasOrdem          = ["segunda", "terca", "quarta", "quinta", "sexta"]
+            todosHorarios      = nub (map (\h -> (dia h, horaInicio h)) horarios)
+            horariosUnicos     = filter (\(d, _) -> d == "segunda") todosHorarios
+                              ++ filter (\(d, _) -> d == "terca")   todosHorarios
+                              ++ filter (\(d, _) -> d == "quarta")  todosHorarios
+                              ++ filter (\(d, _) -> d == "quinta")  todosHorarios
+                              ++ filter (\(d, _) -> d == "sexta")   todosHorarios
+            geraTabela (d, hi) = (d, hi, hi + 2.0, escalaBolsistas horarios d hi)
+
+  Mas ainda não estava do jeito que eu queria, pois mostrava apenas os horários que tinha bolsistas trabalhando e eu queria que mostrasse os que não tinham também, então fui alterando até conseguir chegar nisso, sozinha sem Ia nesse parte de corrigir.
+
+<br> Não copiei nenhum código de IA, além da parte para ajustar a tabela da escala, até porque quando solicitei a ela uma maneira de implementar, ela me deu um código muito mais complexo do que tinha visto em aula, o que não me ajudou, mas me fez buscar no navegador formas para implementar os tipos em Haskell, que não tivemos em aual, então consegui aprender algo de diferente. Mas a IA fica muito fixa em fazer códigos que não estão de acordo com meu nível de conhecimento e por mais que isso poderia ajudar, acaba atrapalhando, pois não sei muito do básico ainda então acaba sendo mais complicado de compreender o que ela gera, pois mistura muita coisa e gera coisas "do além" como o 'deriving' que não sei como funciona.
 
 ---
 
@@ -356,3 +381,5 @@ Bom, antes de comecar a implementar as funções, perguntei para o claude como e
 - material sobre cálculos para fazer a parte dos horários -> https://folivetti.github.io/courses/Haskell/Funcoes
 
 - documento com código docker do meu outro professor -> https://drive.google.com/file/d/1tL7BF0ey4KO4C--5DPMavt3DmH-rC1CT/view?usp=classroom_web&authuser=0
+
+- sobre nub -> http://www.zvon.org/other/haskell/Outputlist/nub_f.html
