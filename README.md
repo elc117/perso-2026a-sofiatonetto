@@ -112,7 +112,7 @@ Descreva de forma breve como você realizou o deploy a partir da base e das orie
 
 ## 7. Resultado final
 
-Antes do resultado final quero explicar como é funciona no lab atualmente, todo inicio de semestre a professora solicita no frupo de whatsApp a grade de horários dos alunos e depois ela nos manda a tabela com nossos horários. A desse semestre está assim: <img width="849" height="1129" alt="image" src="https://github.com/user-attachments/assets/39da0b7b-2014-4c82-b5fd-388383acfe92" />
+Antes do resultado final quero explicar como é funciona no lab atualmente, todo inicio de semestre a professora solicita no frupo de whatsApp a grade de horários dos alunos e depois ela nos manda a tabela com nossos horários. A desse semestre está assim: <img width="200" height="500" alt="image" src="https://github.com/user-attachments/assets/39da0b7b-2014-4c82-b5fd-388383acfe92" />
 
 
 Apresente o resultado final do trabalho, na forma de GIF animado ou vídeo curto (máximo 60s)
@@ -283,3 +283,5 @@ Bom, antes de comecar a implementar as funções, perguntei para o claude como e
 - material utilizado para os teste -> https://github.com/elc117/haskell01-2026a-sofiatonetto
 
 - material utilizado para ajustar a forma de declarar os tipos: https://pt.wikibooks.org/wiki/Haskell/Declaração_de_tipos
+
+- material sobre cálculos para fazer a parte dos horários -> https://folivetti.github.io/courses/Haskell/Funcoes
