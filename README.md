@@ -197,32 +197,27 @@ Esse foi o resultado que ele me deu, mas não queria o bold e ele retirou parte 
 
 <br> * gostaria de ressaltar que eneviei o meu código feito já e só solicitei para que ajustasse de acordo com o padrão da linguagem sem alterar a lógica que já tinha feito!
 
-#### Interação 4 (opcional)
-
-- **Objetivo da consulta:**  
-- **Trecho do prompt ou resumo fiel:**  
-- **O que foi aproveitado:**  
-- **O que foi modificado ou descartado:**  
-
-#### Interação 5 (opcional)
-
-- **Objetivo da consulta:**  
-- **Trecho do prompt ou resumo fiel:**  
-- **O que foi aproveitado:**  
-- **O que foi modificado ou descartado:**  
-
 ---
 
 ### 8.3 Exemplo de erro, limitação ou sugestão inadequada da IA
 
-Descreva **ao menos um caso** em que a IA:
-
-- errou
-- foi incompleta
-- sugeriu algo inadequado ou incompreensível
-- produziu código que precisou de correção relevante
-
-Explique brevemente o que aconteceu e como você percebeu ou corrigiu o problema.
+Bom, antes de comecar a implementar as funções, perguntei para o claude como eu iria representar os horários usando os tipos em Haskell. Ele me respondeu isso: <br> 
+           
+            data Turno = Manha | Tarde | Noite
+                deriving (Show, Eq, Ord)
+              
+            data DiaSemana = Segunda | Terca | Quarta | Quinta | Sexta
+              deriving (Show, Eq, Ord)
+            
+            data Slot = Slot DiaSemana Turno
+              deriving (Show, Eq, Ord)
+            
+            data Bolsista = Bolsista
+              { bolsistaId   :: Int
+              , bolsistaNome :: String
+              , bolsistaSlots :: [Slot]
+              } deriving (Show, Eq)
+ <br> -> porém achei muito complexo, ele utilizou coisas que não aprendi em aula. Com isso, fui pesquisar como funcionava os tipos em Haskell e encontrei um material (https://www.google.com/url?sa=t&source=web&rct=j&opi=89978449&url=https://www.inf.ufpr.br/andrey/ci062/ProgramacaoHaskell.pdf&ved=2ahUKEwj9gaCaop2UAxVEP7kGHerwHIsQFnoECBkQAQ&usg=AOvVaw1Jn5DlTtiu358ISgqHb2rp) que me ajudou a entender como declarar esses tipos. <br> A partir desse erro, percebi que não adiantaria solicitar para IA os códigos pelo fato de ela não acompanhar o meu nível de entendimento de Haskell, então fui buscando nos materiais e no navegador como usar certas funções. Com esse material consegui declarar de um forma que eu entendesse, sem ser muito complexo, mas que acabei não usando o código que a claude gerou. 
 
 ---
 
@@ -230,14 +225,9 @@ Explique brevemente o que aconteceu e como você percebeu ou corrigiu o problema
 
 * utilizei a IA do gemini 3 Flash Free para me ajudar a configurar o markdown, pois estava com dificuldade de deixar a setas uma embaixo da outra.
 
-Escreva um breve comentário pessoal sobre o processo envolvendo IA.
+* utilizei a claude sonnert 4.6 pro para me ajudar a identificar o que eu tinha escrito no meu código que estava fora do padrão de programação em Haskell.
 
-Você pode comentar, por exemplo:
-
-- algo que passou a compreender melhor
-- uma dificuldade que conseguiu superar
-- uma limitação que ainda sente
-- como o uso de IA ajudou ou atrapalhou em certos momentos.
+<br> Posso dizer que acredito ter usado IA de forma ética, pois não copiei nenhum código de IA, até porque quando solicitei a ela uma maneira de implementar, ela me deu um código muito mais complexo do que tinha visto em aula, o que não me ajudou, mas me fez buscar no navegador formas para implementar os tipos em Haskell, que não tivemos em aual, então consegui aprender algo de diferente. Mas a IA fica muito fixa em fazer códigos que não estão de acordo com meu nível de conhecimento e por mais que isso poderia ajudar, acaba atrapalhando, pois não sei muito do básico ainda então acaba sendo mais complicado de compreender o que ela gera, pois mistura muita coisa e gera coisas "do além" como o 'deriving' que não entendi como funciona.
 
 ---
 
