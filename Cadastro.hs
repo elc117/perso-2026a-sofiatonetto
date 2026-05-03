@@ -1,22 +1,12 @@
-module cadastro where 
+module Cadastro where 
 
 data Bolsista = Bolsista
-{
-    matricula :: String,
-    nome :: String,
-    email :: String,
-    linha_pesquisa :: String,
-    horarios_livres :: String
-
-}
-
-data Horario = Horario
-{   
-    horarioId :: Int,
-    dia :: String,
-    intervalo :: Int,
-    matricula_bolsista :: String
-}
+  { matricula      :: String
+  , nome           :: String
+  , email          :: String
+  , linhaPesquisa  :: String
+  , horariosLivres :: String
+  }
 
 matriculaCadastrada :: [Bolsista] -> String -> Bool
 matriculaCadastrada bolsistas matri =
