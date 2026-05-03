@@ -1,0 +1,33 @@
+services:
+  lifa-bd:
+    image: postgres:15
+    container_name: lifa_bd
+    restart: always
+    environment:
+      POSTGRES_DB: lifa_hs
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    ports:
+      - "5433:5432"
+    volumes:
+      - lifa_bd_data:/var/lib/postgresql/data
+
+  lifa-pgadmin:
+    image: dpage/pgadmin4
+    container_name: lifa_pgadmin4
+    restart: always
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@admin.com
+      PGADMIN_DEFAULT_PASSWORD: admin
+    ports:
+      - "5052:80"
+    volumes:
+      - pgadmin_data:/var/lib/pgadmin
+    depends_on:
+      - lifa-bd
+
+volumes:
+  lifa_bd_data:
+    driver: local
+  pgadmin_data:
+    driver: local
