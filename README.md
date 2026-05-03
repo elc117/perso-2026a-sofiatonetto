@@ -49,6 +49,26 @@ Se o desenvolvimento não conseguir atingir todos os objetivos e requisitos, ess
 ---
 
 ## 4. Testes
+Primeiro, instalei o ghc com o comando "sudo apt-get install ghc" e depois "ghci Cadastro.hs TesteMyFunctions.hs".<br> Só que deu esse erro: 
+
+    Cadastro.hs:4:1: error: parse error on input ‘{’
+      |
+    4 | {
+      | ^
+    Failed
+e não entendi, então voltei no material e não achei nada, então pesquisei no goole e fui nesse site (https://pt.wikibooks.org/wiki/Haskell/Declaração_de_tipos), consegui perceber que minha ',' estavam em lugares diferentes que no código mostrado, depois de alterar isso, instalei o HUnit com -> "sudo apt-get install libghc-hunit-dev", pois deu esse erro:
+     <br> [1 of 3] Compiling Cadastro         ( Cadastro.hs, interpreted )
+     <br> [2 of 3] Compiling Main             ( TestMyFunctions.hs, interpreted )
+      
+      TestMyFunctions.hs:4:1: error:
+          Could not find module ‘Test.HUnit’
+          Use -v (or `:set -v` in ghci) to see a list of the files searched for.
+        |
+      4 | import Test.HUnit
+        | ^^^^^^^^^^^^^^^^^
+      Failed, one module loaded.
+  <br> Depois disso, "ghci Cadastro.hs TesteMyFunctions.hs", então não deu nenhum erro. 
+
 
 Descreva brevemente como você lidou com os testes unitários das funções que implementam a lógica do serviço, independentemente do Scotty.
 
@@ -245,3 +265,5 @@ Bom, antes de comecar a implementar as funções, perguntei para o claude como e
 - para "editar" listas, ou seja, uso do 'map' para criar outra lista baseada na primeira, que, na minha cabeça, funciona como uma função de editar -> https://pt.wikibooks.org/wiki/Haskell/Listas_II
 
 - material utilizado para os teste -> https://github.com/elc117/haskell01-2026a-sofiatonetto
+
+- material utilizado para ajustar a forma de declarar os tipos: https://pt.wikibooks.org/wiki/Haskell/Declaração_de_tipos
