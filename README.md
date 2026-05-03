@@ -250,7 +250,7 @@ Esse foi o resultado que ele me deu, mas não queria o bold e ele retirou parte 
 - **Objetivo da consulta:** entender como conectar com o banco, pois não achei em nenhum outro site.
 - **Trecho do prompt ou resumo fiel:** "Criei o arquivo database.hs e baixei o pacote com "sudo apt-get install libghc-postgresql-simple-dev" o que devo ter nesse arquivo e como conectar com meu banco lifa_hs no postgres?"
 - **O que foi aproveitado:**  aproveitei o código de conexão e as dicas do que eu deveria fazer depois.
-- **O que foi modificado ou descartado:** aproveitei todo o código que ele me deu, mas também usei uma biblioteca que o google me indicou:
+- **O que foi modificado ou descartado:** aproveitei todo o código que ele me deu, mas também usei uma biblioteca que o google me indicou, também alterei para a porta e usuário que eu estava usando:
 
 
         import Database.PostgreSQL.Simple
