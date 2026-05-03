@@ -65,12 +65,14 @@ e não entendi, então voltei no material e não achei nada a respeito, pesquise
         | ^^^^^^^^^^^^^^^^^
       Failed, one module loaded.
   <br> Depois disso, "ghci ghci -package HUnit Cadastro.hs TestMyFunctions.hs" com HUnit
-                      GHCi, version 9.4.7: https://www.haskell.org/ghc/  :? for help
-                      [1 of 3] Compiling Cadastro         ( Cadastro.hs, interpreted )
-                      [2 of 3] Compiling Main             ( TestMyFunctions.hs, interpreted )
-                      Ok, two modules loaded.
+     
+      GHCi, version 9.4.7: https://www.haskell.org/ghc/  :? for help
+      [1 of 3] Compiling Cadastro         ( Cadastro.hs, interpreted )
+      [2 of 3] Compiling Main             ( TestMyFunctions.hs, interpreted )
+      Ok, two modules loaded.
 <br> Sem nenhum erro, comecei a testar algumas funções:
-      ghci> matriculaCadastrada [Bolsista "202500101" "Ana" "ana@gmail.com" "Machine Learning" "segunda 10:00 12:00"] "202500101"
+
+    ghci> matriculaCadastrada [Bolsista "202500101" "Ana" "ana@gmail.com" "Machine Learning" "segunda 10:00 12:00"] "202500101"
       True
       ghci> matriculaCadastrada [Bolsista "202500101" "Ana" "ana@gmail.com" "Machine Learning" "segunda 10:00 12:00"] "999"
       False
