@@ -62,7 +62,25 @@ Quando fui conectar o banco percebi que tinha criado dentro do banco que uso par
     ghci> length bolsistas
     1
 
-Depois disso, fui para o Scotty, instalei com "sudo apt-get install libghc-scotty-dev". Depois criei o Main e fui colocando o código de acordo com o material e dicas da professora. 
+Depois disso, fui para o Scotty, instalei com "sudo apt-get install libghc-scotty-dev". Depois criei o Main e fui colocando o código de acordo com o material e dicas da professora. Consegui terminar essa parte e coloquei os comandos e ele foi me respondendo:
+
+    :load Main.hs
+    [1 of 5] Compiling Cadastro         ( Cadastro.hs, interpreted )
+    [2 of 5] Compiling Horario          ( Horario.hs, interpreted )
+    [3 of 5] Compiling Database         ( Database.hs, interpreted )
+    [4 of 5] Compiling Main             ( Main.hs, interpreted )
+    Ok, four modules loaded.
+    ghci> main 
+    Setting phasers to stun... (port 3000) (ctrl-c to quit)
+    GET /
+    Accept: text/html, application/xhtml+xml, application/xml; q=0.9, */*; q=0.8
+    Status: 404 Not Found 0.000281135s
+    GET /favicon.ico
+    Accept: */*
+    Status: 404 Not Found 0.000046216s
+    GET /bolsistas
+    Accept: text/html, application/xhtml+xml, application/xml; q=0.9, */*; q=0.8
+    Status: 200 OK 0.001041309s
 
 - como você separou a lógica do serviço da parte ligada ao Scotty
 ---
