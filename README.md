@@ -89,16 +89,12 @@ Você também pode acrescentar uma breve explicação sobre o que está sendo de
 
 ### 8.1 Ferramentas de IA utilizadas 
 
-* Gemini 3 Flash Free modo rápido;
-
-Liste as principais ferramentas de IA utilizadas, com suas versões/modelos/planos. Por exemplo, ChatGPT Free com GPT-5.2 Thinking, GitHub Copilot com Gemini 2.0 Flash, Antigravity com Claude Sonnet 4.6 (Thinking), etc.
+* Gemini 3 Flash Free modo rápido; (utilizado para ajustar markdown)
+* Claude.ia Sonnet 4.6 plano pro; (utilizado para entender passo a passo e para corrigir de acordo com o padrão Haskell)
 
 ---
 
 ### 8.2 Interações relevantes com IA
-
-Inclua **de 3 a 5 interações relevantes** com ferramentas de IA.
-
 
 #### Interação 1
 
@@ -173,31 +169,31 @@ Esse foi o resultado que ele me deu, mas não queria o bold e ele retirou parte 
     buscaPorMatricula :: [Bolsistas] -> String -> [Bolsistas]
     buscaPorMatricula bolsistas matricula = filter(\b -> matricula b == matricula) bolsistas"
 - **O que foi aproveitado:** aproveitei para ajustar o nome das variáveis, pois, segundo ele, não é de bom tom utilizar um variável "linha_pesquisa", mas sim "linhaPesquisa";
-- **O que foi modificado ou descartado:**  ele me deu essa resposta - "Aqui estão os problemas encontrados:
+- **O que foi modificado ou descartado:**  ele me deu essa resposta - <b> "Aqui estão os problemas encontrados:
 
-**1. Nome do módulo — deve começar com maiúscula:**
-```haskell
--- errado
-module cadastro where
--- certo
-module Cadastro where
-```
-
-**2. Nome do tipo no plural — convenção Haskell é singular:**
-```haskell
--- errado
-data Bolsistas = Bolsistas
--- certo
-data Bolsista = Bolsista
-```
-
-**3. snake_case nos campos — Haskell usa camelCase:**
-```haskell
--- errado
-linha_pesquisa, horarios_livres, matricula_bolsista, nome_editado
--- certo
-linhaPesquisa, horariosLivres, matriculaBolsista, nomeEditado
-```
+    **1. Nome do módulo — deve começar com maiúscula:**
+    ```haskell
+    -- errado
+    module cadastro where
+    -- certo
+    module Cadastro where
+    ```
+    
+    **2. Nome do tipo no plural — convenção Haskell é singular:**
+    ```haskell
+    -- errado
+    data Bolsistas = Bolsistas
+    -- certo
+    data Bolsista = Bolsista
+    ```
+    
+    **3. snake_case nos campos — Haskell usa camelCase:**
+    ```haskell
+    -- errado
+    linha_pesquisa, horarios_livres, matricula_bolsista, nome_editado
+    -- certo
+    linhaPesquisa, horariosLivres, matriculaBolsista, nomeEditado
+    ```
 
 <br> * gostaria de ressaltar que eneviei o meu código feito já e só solicitei para que ajustasse de acordo com o padrão da linguagem sem alterar a lógica que já tinha feito!
 
