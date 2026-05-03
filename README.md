@@ -42,6 +42,11 @@ Dificuldades -> HUnit, com certeza, pois no TestMyFunctions da professora já es
 
 Usei bastante as funções map e filter e o where, então agora posso dizer que consigo trabalhar bem com elas. E também entendi o main IO, pois desde a primeira vez que li isso, não conseguia entender e sempre que tentava usar dava erro, nesse trabalho e com os materiais das aulas consegui utilizar. Outra dificuldade foi trabalhar com vários filter ao mesmo tempo dentro de uma função, pois me confundi bastante, no final quase não sabia o que eu estava aplicando em cada parte e tive que refazer algumas vezes. Basicamente, resumindo, trabalhei com funções puras, de alta ordem, lambda, com composição de funções e where para as verificações. 
 
+A maior dificuldade foi trabalhar com o banco de dados e a conexão, pois já tinha feito isso com PHP e Java, mas Haskell foi diferente, então pesquisei no navegador e não achei nenhum site, mas a IA normal do google <img width="200" height="200" alt="image" src="https://github.com/user-attachments/assets/298fac4a-dd17-44fb-9a29-3c9d384def64" /> me deu uma parte de um código e então solicitei ao claude que me ajudasse e me mostrasse o que estava faltando.  
+
+Quando fui conectar o banco percebi que tinha criado dentro do banco que uso para meus trabalhos em uma disciplina, então tive que fazer outro arquivo docker para um novo banco, pois desse jeito não estava dando certo. Fiz o código inspirada no material que o professor passou no primeiro dia de aula de banco de dados. Isso me deu muitos erros, pois não estava conseguindo conectar e abrir o pgAdmin mais, então coloquei os códigos para fazer as tabelas no novo banco pelo terminal mesmo. 
+
+
 - como você separou a lógica do serviço da parte ligada ao Scotty
 ---
 
@@ -242,6 +247,26 @@ Esse foi o resultado que ele me deu, mas não queria o bold e ele retirou parte 
 
 <br> * gostaria de ressaltar que eneviei o meu código feito já e só solicitei para que ajustasse de acordo com o padrão da linguagem sem alterar a lógica que já tinha feito!
 
+#### Interação 4
+
+- **Objetivo da consulta:** entender como conectar com o banco, pois não achei em nenhum outro site.
+- **Trecho do prompt ou resumo fiel:** "Criei o arquivo database.hs e baixei o pacote com "sudo apt-get install libghc-postgresql-simple-dev" o que devo ter nesse arquivo e como conectar com meu banco lifa_hs no postgres?"
+- **O que foi aproveitado:**  aproveitei o código de conexão e as dicas do que eu deveria fazer depois.
+- **O que foi modificado ou descartado:** aproveitei todo o código que ele me deu, mas também usei uma biblioteca que o google me indicou, também alterei para a porta e usuário que eu estava usando:
+
+
+        import Database.PostgreSQL.Simple
+        import Cadastro
+        import Horario
+        
+        conectar :: IO Connection
+        conectar = connect defaultConnectInfo
+          { connectHost     = "localhost"
+          , connectDatabase = "lifa_hs"
+          , connectUser     = "admin"
+          , connectPassword = "admin"
+          }
+
 ---
 
 ### 8.3 Exemplo de erro, limitação ou sugestão inadequada da IA
@@ -294,3 +319,5 @@ Bom, antes de comecar a implementar as funções, perguntei para o claude como e
 - material utilizado para ajustar a forma de declarar os tipos: https://pt.wikibooks.org/wiki/Haskell/Declaração_de_tipos
 
 - material sobre cálculos para fazer a parte dos horários -> https://folivetti.github.io/courses/Haskell/Funcoes
+
+- documento com código docker do meu outro professor -> https://drive.google.com/file/d/1tL7BF0ey4KO4C--5DPMavt3DmH-rC1CT/view?usp=classroom_web&authuser=0
