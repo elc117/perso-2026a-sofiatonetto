@@ -15,6 +15,17 @@ main = do
   scotty 3000 $ do
     middleware logStdoutDev
 
+    get "/" $ do
+      html =<< liftIO (readFile "index.html")
+
+    get "/style.css" $ do
+      setHeader "Content-Type" "text/css"
+      file "css.css"
+
+    get "/script.js" $ do
+      setHeader "Content-Type" "application/javascript"
+      file "script.js"
+
     get "/bolsistas" $ do
       bolsistas <- liftIO $ buscarTodosBolsistas conn
       json (map (\b -> object
