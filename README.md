@@ -117,10 +117,29 @@ Esse foi o resultado que ele me deu, mas não queria o bold e ele retirou parte 
 
 #### Interação 2
 
-- **Objetivo da consulta:**  
-- **Trecho do prompt ou resumo fiel:**  
-- **O que foi aproveitado:**  
-- **O que foi modificado ou descartado:**  
+- **Objetivo da consulta:**  entender o passo a passo, por continuar, pois tinha feito o código para criar o banco de dados e comecei a fazer o código do cadastro, mas não tinha entendido direito pelo email da proposta então pedi para fazer uma guia para eu ir dando check.
+- **Trecho do prompt ou resumo fiel:**  Qual ordem devo fazer? fiz o banco, mas não sei por onde prosseguir, minha professora me aconselhou assim: "sem se preocupar com requisições pela web. Depois que isso estiver funcionando, conecte as funções puras ao scotty.Sobre o deploy no Render, já forneci um exemplo que serve de ponto de partida, mas pode ser que você precise adicionar outras dependências e certamente terá que ajustar a localização do código."
+- **O que foi aproveitado:**  todo o passo a passo que ele deu serviu de base para ir implementando as funcionalidades
+- **O que foi modificado ou descartado:**  <br> "A professora deu a ordem exata. Segue assim:<br>
+1. Representação dos dados + funções puras (agora)
+
+Criar o Logic.hs com os tipos Bolsista e Horario e as funções de cadastro, busca e edição
+Criar o Tests.hs e rodar pra ver tudo funcionando sem banco, sem web
+
+2. Conectar ao banco (depois)
+
+Criar o Database.hs que lê e escreve no PostgreSQL
+Testar as queries
+
+3. Conectar ao Scotty (depois do banco funcionar)
+
+Criar o Main.hs com as rotas POST e GET
+Testar as rotas com curl
+
+4. Deploy no Render (por último)
+
+Ajustar o Dockerfile e o render.yaml
+Subir no GitHub e conectar ao Render" <br> Nada foi modificado nem descartado
 
 #### Interação 3 
 
