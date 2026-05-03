@@ -18,13 +18,12 @@ data Horario = Horario
     matricula_bolsista :: String
 }
 
-cadastrar :: [Bolsistas] -> String -> String -> String -> String -> String -> Maybe[Bolsistas]
-cadastrar bs matricula nome email linha_pesquisa horarios_livres
-    | matricula == "" = Left "Este campo deve ser preenchido"
-    | nome == "" = Left "Este campo deve ser preenchido"
-    | email == "" = Left "Este campo deve ser preenchido"
-    | linha_pesquisa == "" = Left "Este campo deve ser preenchido"
-    | horarios_livres == "" = Left "Este campo deve ser preenchido"
-    | jaCadastrado bs matricula = "" = Left "Esta matrícula já foi cadastrada no sistema"
-    | otherwise = Right (bs ++ [Bolsistas matricula nome email linha_pesquisa horarios_livres])
+matriculaCadastrada :: [Bolsistas] -> String -> Bool
+matriculaCadastrada Bolsistas matricula =
+    lenght (filter(\b -> matricula b == matricula) Bolsistas) > 0
 
+cadastrar :: [Bolsistas] -> String -> String -> String -> String -> String -> [Bolsistas]
+cadastrar bs matricula nome email linha_pesquisa horarios_livres
+    Bolsistas ++ [Bolsistas matricula nome email linha_pesquisa horarios_livres]
+    where
+        jaCadastrado = matriculaCadastrada Bolsistas matricula
