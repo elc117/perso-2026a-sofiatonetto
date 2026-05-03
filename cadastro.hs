@@ -1,10 +1,10 @@
 module cadastro where 
 
-data Bolsistas = Bolsistas 
+data Bolsista = Bolsista
 {
     matricula :: String,
     nome :: String,
-    email :: String
+    email :: String,
     linha_pesquisa :: String,
     horarios_livres :: String
 
@@ -18,25 +18,25 @@ data Horario = Horario
     matricula_bolsista :: String
 }
 
-matriculaCadastrada :: [Bolsistas] -> String -> Bool
-matriculaCadastrada Bolsistas matricula =
-    lenght (filter(\b -> matricula b == matricula) Bolsistas) > 0
+matriculaCadastrada :: [Bolsista] -> String -> Bool
+matriculaCadastrada bolsistas matri =
+  length (filter (\b -> matricula b == matri) bolsistas) > 0
 
-cadastrar :: [Bolsistas] -> String -> String -> String -> String -> String -> [Bolsistas]
-cadastrar bs matricula nome email linha_pesquisa horarios_livres = Bolsistas ++ [Bolsistas matricula nome email linha_pesquisa horarios_livres]
-    where
-        jaCadastrado = matriculaCadastrada Bolsistas matricula
+cadastrar :: [Bolsista] -> String -> String -> String -> String -> String -> [Bolsista]
+cadastrar bolsistas matri n e lp hl = bolsistas ++ [Bolsista matri n e lp hl]
+  where
+    jaCadastrado = matriculaCadastrada bolsistas matri
 
-editarBolsista :: [Bolsistas] -> String -> String -> [Bolsistas]
-editarBolsista Bolsistas matricula horarios_livres_editado = map $ atualizaBolsista Bolsistas
-    where
-        atualizaBolsista b = b { horarios_livres = horarios_livres_editado}
+editarBolsista :: [Bolsista] -> String -> String -> String -> String -> String -> [Bolsista]
+editarBolsista bolsistas mat nomeEditado emailEditado linhaPesquisaEditada horariosLivresEditado = map atualizaBolsista bolsistas
+  where
+    atualizaBolsista b = b { nome = nomeEditado, email = emailEditado, linhaPesquisa = linhaPesquisaEditada, horariosLivres = horariosLivresEditado }
 
-listarBolsistas :: [Bolsistas] -> [String]
-listarBolsistas Bolsistas = map (\b matricula b ++ " . " ++ nome b ++ " . " ++ email b ++ " . " ++ horarios_livres ++ " . " ++ linha_pesquisa b) Bolsistas
+listarBolsistas :: [Bolsista] -> [String]
+listarBolsistas bolsistas = map (\b -> matricula b ++ " . " ++ nome b ++ " . " ++ email b ++ " . " ++ horariosLivres b ++ " . " ++ linhaPesquisa b) bolsistas
 
-buscarPorPesquisa :: [Bolsistas] -> String -> [Bolsistas]
-buscarPorPesquisa Bolsistas linha_pesquisa = filter(\b -> linha_pesquisa b == linha_pesquisa) Bolsistas
+buscarPorPesquisa :: [Bolsista] -> String -> [Bolsista]
+buscarPorPesquisa bolsistas lp = filter (\b -> linhaPesquisa b == lp) bolsistas
 
-buscaPorMatricula :: [Bolsistas] -> String -> [Bolsistas]
-buscaPorMatricula Bolsistas matricula = filter(\b -> matricula b == matricula) Bolsistas
+buscarPorMatricula :: [Bolsista] -> String -> [Bolsista]
+buscarPorMatricula bolsistas mat = filter (\b -> matricula b == mat) bolsistas
