@@ -59,11 +59,17 @@ main = do
       json (object ["mensagem" .= ("Bolsista atualizado" :: String)])
 
     get "/escala" $ do
-      horarios <- liftIO $ buscarTodosHorarios conn
+      horarios  <- liftIO $ buscarTodosHorarios conn
+      bolsistas <- liftIO $ buscarTodosBolsistas conn
       let escala = geraEscala horarios
-      json (map (\(d, hi, hf, bs) -> object
+      json (map (\(d, hi, hf, mats) -> object
         [ "dia"        .= d
         , "horaInicio" .= hi
         , "horaFim"    .= hf
-        , "bolsistas"  .= bs
+        , "bolsistas"  .= map (buscarNome bolsistas) mats
         ]) escala)
+      where
+        buscarNome bs mat =
+          case filter (\b -> matricula b == mat) bs of
+            (b:_) -> nome b
+            []    -> mat

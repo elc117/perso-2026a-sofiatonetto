@@ -1,22 +1,24 @@
 module Horario where
 
 import Cadastro
+import Data.Scientific (Scientific)
+import Data.List (nub)
 
 data Horario = Horario
   { horarioId         :: Int
   , dia               :: String
-  , horaInicio        :: Double
-  , intervalo         :: Double
+  , horaInicio        :: Scientific
+  , intervalo         :: Scientific
   , matriculaBolsista :: String
   }
 
-intervaloFim :: Horario -> Double
+intervaloFim :: Horario -> Scientific
 intervaloFim h = horaInicio h + intervalo h
 
-horasTotais :: [Horario] -> String -> Double
+horasTotais :: [Horario] -> String -> Scientific
 horasTotais horarios mat = sum(map intervalo(filter (\h -> matriculaBolsista h == mat) horarios))
 
-escalaBolsistas :: [Horario] -> String -> Double -> [String]
+escalaBolsistas :: [Horario] -> String -> Scientific -> [String]
 escalaBolsistas horarios diaEscala inicio = map matriculaBolsista (filter horarioIgual horarios) 
     where 
     horarioIgual h = dia h == diaEscala && horaInicio h == inicio
@@ -30,8 +32,11 @@ bolsistasPorPesquisa bolsistas horarios diaEscala lp = map matriculaBolsista(fil
     bolsistasPesquisa = map matricula (filter (\b -> linhaPesquisa b == lp) bolsistas)
     horarioCompativeis h = dia h == diaEscala && length(filter(\m -> m == matriculaBolsista h) bolsistasPesquisa) > 0
 
-geraEscala :: [Horario] -> [(String, Double, Double, [String])]
-geraEscala horarios = map geraTabela horariosDefinidos 
-    where 
-    horariosDefinidos = filter(\h -> length (filter(\hh -> dia hh == dia h && horaInicio hh == horaInicio h) horarios) > 0) horarios
-    geraTabela h = (dia h, horaInicio h, intervaloFim h, escalaBolsistas horarios (dia h) (horaInicio h))
+geraEscala :: [Horario] -> [(String, Scientific, Scientific, [String])]
+geraEscala horarios =
+  map geraTabela todosSlots
+  where
+    dias      = ["segunda", "terca", "quarta", "quinta", "sexta"]
+    turnos    = [8.5, 10.5, 13.5, 15.5]
+    todosSlots = [(d, hi) | d <- dias, hi <- turnos]
+    geraTabela (d, hi) = (d, hi, hi + 2.0, escalaBolsistas horarios d hi)
