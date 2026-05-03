@@ -62,7 +62,7 @@ Quando fui conectar o banco percebi que tinha criado dentro do banco que uso par
     ghci> length bolsistas
     1
 
-Depois disso, fui para o Scotty, instalei com "sudo apt-get install libghc-scotty-dev" 
+Depois disso, fui para o Scotty, instalei com "sudo apt-get install libghc-scotty-dev". Depois criei o Main e fui colocando o código de acordo com o material e dicas da professora. 
 
 - como você separou a lógica do serviço da parte ligada ao Scotty
 ---
