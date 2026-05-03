@@ -44,10 +44,45 @@ Usei bastante as funções map e filter e o where, então agora posso dizer que 
 
 A maior dificuldade foi trabalhar com o banco de dados e a conexão, pois já tinha feito isso com PHP e Java, mas Haskell foi diferente, então pesquisei no navegador e não achei nenhum site, mas a IA normal do google <img width="200" height="200" alt="image" src="https://github.com/user-attachments/assets/298fac4a-dd17-44fb-9a29-3c9d384def64" /> me deu uma parte de um código e então solicitei ao claude que me ajudasse e me mostrasse o que estava faltando.  
 
-Quando fui conectar o banco percebi que tinha criado dentro do banco que uso para meus trabalhos em uma disciplina, então tive que fazer outro arquivo docker para um novo banco, pois desse jeito não estava dando certo. Fiz o código inspirada no material que o professor passou no primeiro dia de aula de banco de dados. Isso me deu muitos erros, pois não estava conseguindo conectar e abrir o pgAdmin mais, então coloquei os códigos para fazer as tabelas no novo banco pelo terminal mesmo. 
+Quando fui conectar o banco percebi que tinha criado dentro do banco que uso para meus trabalhos em uma disciplina, então tive que fazer outro arquivo docker para um novo banco, pois desse jeito não estava dando certo. Fiz o código inspirada no material que o professor passou no primeiro dia de aula de banco de dados. Isso me deu muitos erros, pois não estava conseguindo conectar e abrir o pgAdmin mais, então coloquei os códigos para fazer as tabelas no novo banco pelo terminal mesmo. Depois desses vários erros por estar em conflito com meu outro banco, apaguei aquele outro e fiquei só com o desse trabalho e então fui testar no terminal: 
+    
+    ghci -package postgresql-simple Cadastro.hs Horario.hs Database.hs 
+    GHCi, version 9.4.7: https://www.haskell.org/ghc/  :? for help
+    [1 of 3] Compiling Cadastro         ( Cadastro.hs, interpreted )
+    [2 of 3] Compiling Horario          ( Horario.hs, interpreted )
+    [3 of 3] Compiling Database         ( Database.hs, interpreted )
+    Ok, three modules loaded.
+    ghci> :module Database Cadastro Horario
+    ghci> conn <- conectar
+    ghci> bolsistas <- buscarTodosBolsistas conn
+    ghci> length bolsistas
+    0
+    ghci> inserirBolsista conn (Bolsista "202500101" "Ana" "ana@gmail.com" "Machine Learning" "segunda 08:30 10:30")
+    ghci> bolsistas <- buscarTodosBolsistas conn
+    ghci> length bolsistas
+    1
 
+Depois disso, fui para o Scotty, instalei com "sudo apt-get install libghc-scotty-dev". Depois criei o Main e fui colocando o código de acordo com o material e dicas da professora. Consegui terminar essa parte e coloquei os comandos e ele foi me respondendo:
 
-- como você separou a lógica do serviço da parte ligada ao Scotty
+    :load Main.hs
+    [1 of 5] Compiling Cadastro         ( Cadastro.hs, interpreted )
+    [2 of 5] Compiling Horario          ( Horario.hs, interpreted )
+    [3 of 5] Compiling Database         ( Database.hs, interpreted )
+    [4 of 5] Compiling Main             ( Main.hs, interpreted )
+    Ok, four modules loaded.
+    ghci> main 
+    Setting phasers to stun... (port 3000) (ctrl-c to quit)
+    GET /
+    Accept: text/html, application/xhtml+xml, application/xml; q=0.9, */*; q=0.8
+    Status: 404 Not Found 0.000281135s
+    GET /favicon.ico
+    Accept: */*
+    Status: 404 Not Found 0.000046216s
+    GET /bolsistas
+    Accept: text/html, application/xhtml+xml, application/xml; q=0.9, */*; q=0.8
+    Status: 200 OK 0.001041309s
+ e na web pesquisei: https://ideal-funicular-q5jq5749769hr7j-3000.app.github.dev/bolsistas. Nessa parte ele me mostrou a bolsistas que eu tinha cadastrado antes: "[{"email":"ana@gmail.com","horariosLivres":"segunda 08:30 10:30","linhaPesquisa":"Machine Learning","matricula":"202500101","nome":"Ana"}]"
+
 ---
 
 ## 4. Testes
