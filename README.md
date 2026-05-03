@@ -89,16 +89,12 @@ Você também pode acrescentar uma breve explicação sobre o que está sendo de
 
 ### 8.1 Ferramentas de IA utilizadas 
 
-* Gemini 3 Flash Free modo rápido;
-
-Liste as principais ferramentas de IA utilizadas, com suas versões/modelos/planos. Por exemplo, ChatGPT Free com GPT-5.2 Thinking, GitHub Copilot com Gemini 2.0 Flash, Antigravity com Claude Sonnet 4.6 (Thinking), etc.
+* Gemini 3 Flash Free modo rápido; (utilizado para ajustar markdown)
+* Claude.ia Sonnet 4.6 plano pro; (utilizado para entender passo a passo e para corrigir de acordo com o padrão Haskell)
 
 ---
 
 ### 8.2 Interações relevantes com IA
-
-Inclua **de 3 a 5 interações relevantes** com ferramentas de IA.
-
 
 #### Interação 1
 
@@ -128,37 +124,100 @@ Esse foi o resultado que ele me deu, mas não queria o bold e ele retirou parte 
 
 #### Interação 3 
 
-- **Objetivo da consulta:**  
-- **Trecho do prompt ou resumo fiel:**  
-- **O que foi aproveitado:**  
-- **O que foi modificado ou descartado:**  
+- **Objetivo da consulta:** verificar se tinha algo que eu estava fazendo no meu código que não é considerado de bom uso em Haskell
+- **Trecho do prompt ou resumo fiel:**  mandei esse prompt para ele: "tenho esse código, poderia me dizer o que está em desacordo com o padrão da linguagem Haskell.
+    module cadastro where 
+    
+    data Bolsistas = Bolsistas 
+    {
+        matricula :: String,
+        nome :: String,
+        email :: String,
+        linha_pesquisa :: String,
+        horarios_livres :: String
+    
+    }
+    
+    data Horario = Horario
+    {   
+        horarioId :: Int,
+        dia :: String,
+        intervalo :: Int,
+        matricula_bolsista :: String
+    }
+    
+    matriculaCadastrada :: [Bolsistas] -> String -> Bool
+    matriculaCadastrada bolsistas matricula =
+        length (filter(\b -> matricula b == matricula) bolsistas) > 0
+    
+    cadastrar :: [Bolsistas] -> String -> String -> String -> String -> String -> [Bolsistas]
+    cadastrar bolsistas matricula nome email linha_pesquisa horarios_livres = bolsistas ++ [Bolsistas matricula nome email linha_pesquisa horarios_livres]
+        where
+            jaCadastrado = matriculaCadastrada bolsistas matricula
+    
+    editarBolsista :: [Bolsistas] -> String -> String -> [Bolsistas]
+    editarBolsista bolsistas matricula nome_editado email_editado linha_pesquisa_editada horarios_livres_editado = map atualizaBolsista bolsistas
+        where
+            atualizaBolsista b = b { nome = nome_editado, email = email_editado, linha_pesquisa = linha_pesquisa_editada, horarios_livres = horarios_livres_editado}
+    
+    listarBolsistas :: [Bolsistas] -> [String]
+    listarBolsistas bolsistas = map (\b ->  matricula b ++ " . " ++ nome b ++ " . " ++ email b ++ " . " ++ horarios_livres ++ " . " ++ linha_pesquisa b) Bolsistas
+    
+    buscarPorPesquisa :: [Bolsistas] -> String -> [Bolsistas]
+    buscarPorPesquisa bolsistas linha_pesquisa = filter(\b -> linha_pesquisa b == linha_pesquisa) bolsistas
+    
+    buscaPorMatricula :: [Bolsistas] -> String -> [Bolsistas]
+    buscaPorMatricula bolsistas matricula = filter(\b -> matricula b == matricula) bolsistas"
+- **O que foi aproveitado:** aproveitei para ajustar o nome das variáveis, pois, segundo ele, não é de bom tom utilizar um variável "linha_pesquisa", mas sim "linhaPesquisa";
+- **O que foi modificado ou descartado:**  ele me deu essa resposta - <b> "Aqui estão os problemas encontrados:
 
-#### Interação 4 (opcional)
+    **1. Nome do módulo — deve começar com maiúscula:**
+    ```haskell
+    -- errado
+    module cadastro where
+    -- certo
+    module Cadastro where
+    ```
+    
+    **2. Nome do tipo no plural — convenção Haskell é singular:**
+    ```haskell
+    -- errado
+    data Bolsistas = Bolsistas
+    -- certo
+    data Bolsista = Bolsista
+    ```
+    
+    **3. snake_case nos campos — Haskell usa camelCase:**
+    ```haskell
+    -- errado
+    linha_pesquisa, horarios_livres, matricula_bolsista, nome_editado
+    -- certo
+    linhaPesquisa, horariosLivres, matriculaBolsista, nomeEditado
+    ```
 
-- **Objetivo da consulta:**  
-- **Trecho do prompt ou resumo fiel:**  
-- **O que foi aproveitado:**  
-- **O que foi modificado ou descartado:**  
-
-#### Interação 5 (opcional)
-
-- **Objetivo da consulta:**  
-- **Trecho do prompt ou resumo fiel:**  
-- **O que foi aproveitado:**  
-- **O que foi modificado ou descartado:**  
+<br> * gostaria de ressaltar que eneviei o meu código feito já e só solicitei para que ajustasse de acordo com o padrão da linguagem sem alterar a lógica que já tinha feito!
 
 ---
 
 ### 8.3 Exemplo de erro, limitação ou sugestão inadequada da IA
 
-Descreva **ao menos um caso** em que a IA:
-
-- errou
-- foi incompleta
-- sugeriu algo inadequado ou incompreensível
-- produziu código que precisou de correção relevante
-
-Explique brevemente o que aconteceu e como você percebeu ou corrigiu o problema.
+Bom, antes de comecar a implementar as funções, perguntei para o claude como eu iria representar os horários usando os tipos em Haskell. Ele me respondeu isso: <br> 
+           
+            data Turno = Manha | Tarde | Noite
+                deriving (Show, Eq, Ord)
+              
+            data DiaSemana = Segunda | Terca | Quarta | Quinta | Sexta
+              deriving (Show, Eq, Ord)
+            
+            data Slot = Slot DiaSemana Turno
+              deriving (Show, Eq, Ord)
+            
+            data Bolsista = Bolsista
+              { bolsistaId   :: Int
+              , bolsistaNome :: String
+              , bolsistaSlots :: [Slot]
+              } deriving (Show, Eq)
+ <br> -> porém achei muito complexo, ele utilizou coisas que não aprendi em aula. Com isso, fui pesquisar como funcionava os tipos em Haskell e encontrei um material (https://www.google.com/url?sa=t&source=web&rct=j&opi=89978449&url=https://www.inf.ufpr.br/andrey/ci062/ProgramacaoHaskell.pdf&ved=2ahUKEwj9gaCaop2UAxVEP7kGHerwHIsQFnoECBkQAQ&usg=AOvVaw1Jn5DlTtiu358ISgqHb2rp) que me ajudou a entender como declarar esses tipos. <br> A partir desse erro, percebi que não adiantaria solicitar para IA os códigos pelo fato de ela não acompanhar o meu nível de entendimento de Haskell, então fui buscando nos materiais e no navegador como usar certas funções. Com esse material consegui declarar de um forma que eu entendesse, sem ser muito complexo, mas que acabei não usando o código que a claude gerou. 
 
 ---
 
@@ -166,34 +225,21 @@ Explique brevemente o que aconteceu e como você percebeu ou corrigiu o problema
 
 * utilizei a IA do gemini 3 Flash Free para me ajudar a configurar o markdown, pois estava com dificuldade de deixar a setas uma embaixo da outra.
 
-Escreva um breve comentário pessoal sobre o processo envolvendo IA.
+* utilizei a claude sonnert 4.6 pro para me ajudar a identificar o que eu tinha escrito no meu código que estava fora do padrão de programação em Haskell.
 
-Você pode comentar, por exemplo:
-
-- algo que passou a compreender melhor
-- uma dificuldade que conseguiu superar
-- uma limitação que ainda sente
-- como o uso de IA ajudou ou atrapalhou em certos momentos.
+<br> Não copiei nenhum código de IA, até porque quando solicitei a ela uma maneira de implementar, ela me deu um código muito mais complexo do que tinha visto em aula, o que não me ajudou, mas me fez buscar no navegador formas para implementar os tipos em Haskell, que não tivemos em aual, então consegui aprender algo de diferente. Mas a IA fica muito fixa em fazer códigos que não estão de acordo com meu nível de conhecimento e por mais que isso poderia ajudar, acaba atrapalhando, pois não sei muito do básico ainda então acaba sendo mais complicado de compreender o que ela gera, pois mistura muita coisa e gera coisas "do além" como o 'deriving' que não sei como funciona.
 
 ---
 
 ## 9. Referências e créditos
 
 - email de avaliacao da proposta com passos fornecidos pela professora;
-- material da aula 11 (06/04) sobre Scotty -> https://liascript.github.io/course/?https://raw.githubusercontent.com/AndreaInfUFSM/elc117-2026a/main/classes/11/README.md
+- material da aula 11 sobre Scotty -> https://liascript.github.io/course/?https://raw.githubusercontent.com/AndreaInfUFSM/elc117-2026a/main/classes/11/README.md
 
-Liste referências e créditos de forma detalhada, com título e URL, incluindo, quando aplicável:
+- Página 50 e 51 para os códigos de mostrar os bolsistas e das "data Bolsistas", serviram de base para implementar os meus códigos. -> https://www.google.com/url?sa=t&source=web&rct=j&opi=89978449&url=https://www.inf.ufpr.br/andrey/ci062/ProgramacaoHaskell.pdf&ved=2ahUKEwj9gaCaop2UAxVEP7kGHerwHIsQFnoECBkQAQ&usg=AOvVaw1Jn5DlTtiu358ISgqHb2rp
 
-- sites consultados
-- documentações
-- materiais de aula
-- colegas
-- trechos de código adaptados
-- imagens, vídeos 
+- material da aula 7 para uso do map/filter e lambda -> https://liascript.github.io/course/?https://raw.githubusercontent.com/AndreaInfUFSM/elc117-2026a/main/classes/07/README.md
 
-Exemplo:
+- material da aula 8 para uso do where -> https://liascript.github.io/course/?https://raw.githubusercontent.com/AndreaInfUFSM/elc117-2026a/main/classes/08/README.md#1
 
-- Documentação do Scotty: ...
-- Documentação do Render: ...
-- Material de aula da disciplina: ...
-- Vídeo sobre Scotty: ...
+- para "editar" listas, ou seja, uso do 'map' para criar outra lista baseada na primeira, que, na minha cabeça, funciona como uma função de editar -> https://pt.wikibooks.org/wiki/Haskell/Listas_II
