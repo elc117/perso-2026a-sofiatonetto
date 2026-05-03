@@ -81,8 +81,8 @@ Depois disso, fui para o Scotty, instalei com "sudo apt-get install libghc-scott
     GET /bolsistas
     Accept: text/html, application/xhtml+xml, application/xml; q=0.9, */*; q=0.8
     Status: 200 OK 0.001041309s
+ e na web pesquisei: https://ideal-funicular-q5jq5749769hr7j-3000.app.github.dev/bolsistas. Nessa parte ele me mostrou a bolsistas que eu tinha cadastrado antes: "[{"email":"ana@gmail.com","horariosLivres":"segunda 08:30 10:30","linhaPesquisa":"Machine Learning","matricula":"202500101","nome":"Ana"}]"
 
-- como você separou a lógica do serviço da parte ligada ao Scotty
 ---
 
 ## 4. Testes
