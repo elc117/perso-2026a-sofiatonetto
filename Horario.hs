@@ -19,7 +19,7 @@ horasTotais horarios mat = sum(map intervalo(filter (\h -> matriculaBolsista h =
 escalaBolsistas :: [Horario] -> String -> Double -> [String]
 escalaBolsistas horarios diaEscala inicio = map matriculaBolsista (filter horarioIgual horarios) 
     where 
-    horarioIgual h = dia h == diaEscala && horaInicio = h == inicio
+    horarioIgual h = dia h == diaEscala && horaInicio h == inicio
 
 verificaCargaHoraria :: [Horario] -> String -> Bool
 verificaCargaHoraria horarios matri = horasTotais horarios matri == 12.0
@@ -27,11 +27,11 @@ verificaCargaHoraria horarios matri = horasTotais horarios matri == 12.0
 bolsistasPorPesquisa :: [Bolsista] -> [Horario] -> String -> String -> [String]
 bolsistasPorPesquisa bolsistas horarios diaEscala lp = map matriculaBolsista(filter horarioCompativeis horarios)
     where 
-    bolsistasPesquisa = map matricula (filter (\b -> linhaPesquisa b == lp))
+    bolsistasPesquisa = map matricula (filter (\b -> linhaPesquisa b == lp) bolsistas)
     horarioCompativeis h = dia h == diaEscala && length(filter(\m -> m == matriculaBolsista h) bolsistasPesquisa) > 0
 
 geraEscala :: [Horario] -> [(String, Double, Double, [String])]
 geraEscala horarios = map geraTabela horariosDefinidos 
     where 
     horariosDefinidos = filter(\h -> length (filter(\hh -> dia hh == dia h && horaInicio hh == horaInicio h) horarios) > 0) horarios
-    geraTabela h = (dia h, horaInicio h, intervaloFim h, horarioCompativeis horarios (dia h) (horaInicio h))
+    geraTabela h = (dia h, horaInicio h, intervaloFim h, escalaBolsistas horarios (dia h) (horaInicio h))
