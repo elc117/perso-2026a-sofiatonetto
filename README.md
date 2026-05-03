@@ -44,7 +44,7 @@ Usei bastante as funções map e filter e o where, então agora posso dizer que 
 
 A maior dificuldade foi trabalhar com o banco de dados e a conexão, pois já tinha feito isso com PHP e Java, mas Haskell foi diferente, então pesquisei no navegador e não achei nenhum site, mas a IA normal do google <img width="200" height="200" alt="image" src="https://github.com/user-attachments/assets/298fac4a-dd17-44fb-9a29-3c9d384def64" /> me deu uma parte de um código e então solicitei ao claude que me ajudasse e me mostrasse o que estava faltando.  
 
-Quando fui conectar o banco percebi que tinha criado dentro do banco que uso para meus trabalhos em uma disciplina, então tive que fazer outro arquivo docker para um novo banco, pois desse jeito não estava dando certo. Fiz o código inspirada no material que o professor passou no primeiro dia de aula de banco de dados.
+Quando fui conectar o banco percebi que tinha criado dentro do banco que uso para meus trabalhos em uma disciplina, então tive que fazer outro arquivo docker para um novo banco, pois desse jeito não estava dando certo. Fiz o código inspirada no material que o professor passou no primeiro dia de aula de banco de dados. Isso me deu muitos erros, pois não estava conseguindo conectar e abrir o pgAdmin mais, então coloquei os códigos para fazer as tabelas no novo banco pelo terminal mesmo. 
 
 
 - como você separou a lógica do serviço da parte ligada ao Scotty
