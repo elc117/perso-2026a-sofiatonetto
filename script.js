@@ -6,12 +6,16 @@ function trocarAba(id) {
 }
 
 function cadastrar() {
+  const marcados = Array.from(document.querySelectorAll('.tabela-horarios input[type=checkbox]:checked'))
+    .map(cb => cb.value)
+    .join(', ')
+
   const dados = new URLSearchParams({
     matricula:      document.getElementById('matricula').value,
     nome:           document.getElementById('nome').value,
     email:          document.getElementById('email').value,
     linhaPesquisa:  document.getElementById('linhaPesquisa').value,
-    horariosLivres: document.getElementById('horariosLivres').value
+    horariosLivres: marcados
   })
 
   fetch('/bolsistas', { method: 'POST', body: dados })
@@ -30,6 +34,54 @@ function cadastrar() {
     })
 }
 
+function editar(mat, nom, ema, lp, hl) {
+  document.querySelectorAll('.pagina').forEach(p => p.classList.remove('ativa'))
+  document.querySelectorAll('.aba').forEach(a => a.classList.remove('ativa'))
+  document.getElementById('cadastro').classList.add('ativa')
+  document.querySelectorAll('.aba')[0].classList.add('ativa')
+
+  document.getElementById('matricula').value = mat
+  document.getElementById('matricula').readOnly = true
+  document.getElementById('nome').value = nom
+  document.getElementById('email').value = ema
+  document.getElementById('linhaPesquisa').value = lp
+
+  document.querySelectorAll('.tabela-horarios input[type=checkbox]').forEach(cb => {
+    cb.checked = hl.includes(cb.value)
+  })
+
+  document.getElementById('btnCadastrar').textContent = 'Salvar'
+  document.getElementById('btnCadastrar').setAttribute('onclick', 'salvar()')
+}
+
+function salvar() {
+  const marcados = Array.from(document.querySelectorAll('.tabela-horarios input[type=checkbox]:checked'))
+    .map(cb => cb.value)
+    .join(', ')
+
+  const mat = document.getElementById('matricula').value
+
+  const dados = new URLSearchParams({
+    matricula:      mat,
+    nome:           document.getElementById('nome').value,
+    email:          document.getElementById('email').value,
+    linhaPesquisa:  document.getElementById('linhaPesquisa').value,
+    horariosLivres: marcados
+  })
+
+  fetch('/bolsistas/' + mat, { method: 'POST', body: dados })
+    .then(r => r.json())
+    .then(() => {
+      const msg = document.getElementById('msgCadastro')
+      msg.style.display = 'block'
+      msg.className = 'mensagem sucesso'
+      msg.textContent = 'Bolsista atualizado com sucesso!'
+      document.getElementById('matricula').readOnly = false
+      document.getElementById('btnCadastrar').textContent = 'Cadastrar'
+      document.getElementById('btnCadastrar').setAttribute('onclick', 'cadastrar()')
+    })
+}
+
 function carregarBolsistas() {
   fetch('/bolsistas')
     .then(r => r.json())
@@ -42,6 +94,7 @@ function carregarBolsistas() {
           <td>${b.email}</td>
           <td>${b.linhaPesquisa}</td>
           <td>${b.horariosLivres}</td>
+          <td><button onclick="editar('${b.matricula}','${b.nome}','${b.email}','${b.linhaPesquisa}','${b.horariosLivres}')">✏️</button></td>
         </tr>`
       ).join('')
     })

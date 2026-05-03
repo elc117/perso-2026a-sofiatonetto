@@ -4,6 +4,7 @@ module Main where
 import Web.Scotty
 import Network.Wai.Middleware.RequestLogger (logStdoutDev)
 import Control.Monad.IO.Class (liftIO)
+import Data.Text.Lazy (pack)
 import Data.Aeson (object, (.=))
 import Database
 import Cadastro
@@ -16,11 +17,12 @@ main = do
     middleware logStdoutDev
 
     get "/" $ do
-      html =<< liftIO (readFile "index.html")
+      conteudo <- liftIO (readFile "index.html")
+      html (pack conteudo)
 
     get "/style.css" $ do
       setHeader "Content-Type" "text/css"
-      file "css.css"
+      file "style.css"
 
     get "/script.js" $ do
       setHeader "Content-Type" "application/javascript"
@@ -43,7 +45,18 @@ main = do
       lp  <- param "linhaPesquisa"
       hl  <- param "horariosLivres"
       liftIO $ inserirBolsista conn (Bolsista mat nom ema lp hl)
+      liftIO $ inserirHorariosDoBolsista conn mat hl
       json (object ["mensagem" .= ("Bolsista cadastrado" :: String)])
+
+    post "/bolsistas/:matricula" $ do
+      mat <- param "matricula"
+      nom <- param "nome"
+      ema <- param "email"
+      lp  <- param "linhaPesquisa"
+      hl  <- param "horariosLivres"
+      liftIO $ atualizarBolsista conn (Bolsista mat nom ema lp hl)
+      liftIO $ inserirHorariosDoBolsista conn mat hl
+      json (object ["mensagem" .= ("Bolsista atualizado" :: String)])
 
     get "/escala" $ do
       horarios <- liftIO $ buscarTodosHorarios conn
