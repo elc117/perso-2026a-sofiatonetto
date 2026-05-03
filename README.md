@@ -29,6 +29,8 @@ Eu já tinha comecado a desenvolver o front-end do sistema para o laboratório, 
 
 A primeira decisao foi no armazenamento das grades, pois a ideia seria que a professora fizesse o upload das fotos dos horários de todos os alunos, mas não sei como fazer isso em Haskell então a maneira que pensei para solucionar isso foi a modificacao do formulário de cadastro para que ao invés de fazer o upload da foto da grade, a professora terá que marcar os horários livres dos alunos.
 
+Implementei toda a parte de cadastro, listagem e possibilidade de editar o bolsista, quando fui desenvolver a parte dos horários percebi que estava armazenando os horários errado, com o intervalo e o dia em que estão livres, então segunda livre 2h, por exeplo, mas dessa forma não saberia em qual hora do dia os bolsistas estariam livres para conseguir implementar o algoritmo de proximidade, então alterei a tabela Horarios no banco (ALTER TABLE producao.horarios ADD COLUMN hora_inicio integer not null;) para guardar o horário em que esse intervalo de trabalho começa.
+
 - como a ideia inicial evoluiu (ok)
 
   A fazer: (tudo a partir daqui)
@@ -49,17 +51,44 @@ Se o desenvolvimento não conseguir atingir todos os objetivos e requisitos, ess
 ---
 
 ## 4. Testes
+Primeiro, instalei o ghc com o comando "sudo apt-get install ghc" e depois "ghci Cadastro.hs TesteMyFunctions.hs".<br> Só que deu esse erro: 
 
-Descreva brevemente como você lidou com os testes unitários das funções que implementam a lógica do serviço, independentemente do Scotty.
+    Cadastro.hs:4:1: error: parse error on input ‘{’
+      |
+    4 | {
+      | ^
+    Failed
+e não entendi, então voltei no material e não achei nada a respeito, pesquisei no goole e fui nesse site (https://pt.wikibooks.org/wiki/Haskell/Declaração_de_tipos), consegui perceber que minha ',' estavam em lugares diferentes que no código mostrado, depois de alterar isso, instalei o HUnit com -> "sudo apt-get install libghc-hunit-dev", pois deu esse erro:
+     <br> [1 of 3] Compiling Cadastro         ( Cadastro.hs, interpreted )
+     <br> [2 of 3] Compiling Main             ( TestMyFunctions.hs, interpreted )
+      
+      TestMyFunctions.hs:4:1: error:
+          Could not find module ‘Test.HUnit’
+          Use -v (or `:set -v` in ghci) to see a list of the files searched for.
+        |
+      4 | import Test.HUnit
+        | ^^^^^^^^^^^^^^^^^
+      Failed, one module loaded.
+  <br> Depois disso, "ghci ghci -package HUnit Cadastro.hs TestMyFunctions.hs" com HUnit
+                      GHCi, version 9.4.7: https://www.haskell.org/ghc/  :? for help
+                      [1 of 3] Compiling Cadastro         ( Cadastro.hs, interpreted )
+                      [2 of 3] Compiling Main             ( TestMyFunctions.hs, interpreted )
+                      Ok, two modules loaded.
+<br> Sem nenhum erro, comecei a testar algumas funções:
+      ghci> matriculaCadastrada [Bolsista "202500101" "Ana" "ana@gmail.com" "Machine Learning" "segunda 10:00 12:00"] "202500101"
+      True
+      ghci> matriculaCadastrada [Bolsista "202500101" "Ana" "ana@gmail.com" "Machine Learning" "segunda 10:00 12:00"] "999"
+      False
+      ghci> listarBolsistas [Bolsista "202500101" "Ana" "ana@gmail.com" "Machine Learning" "segunda 10:00 12:00"]
+      ["202500101 . Ana . ana@gmail.com . segunda 10:00 12:00 . Machine Learning"]
+      ghci> nome (head (editarBolsista [Bolsista "202500101" "Ana" "ana@gmail.com" "Machine Learning" "segunda 10:00 12:00"] "202500101" "Ana Silva" "ana@gmail.com" "Machine Learning" "segunda 10:00 12:00"))
+      "Ana Silva"
+      ghci> :q
+      Leaving GHCi."
+      <br>
 
-Inclua, se necessário:
-
-- quais funções puras foram testadas;
-- como os testes foram organizados;
-- se você usou HUnit ou outro modo simples de teste;
-- exemplos curtos do que foi verificado.
-
-Lembre que não se trata de testar se o serviço funciona pela web, mas sim de testar as funções puras que implementam a lógica.
+      
+Essa foram a funções testadas: matriculaCadastrada em que retorna True se a matrícula já foi cadastrada e False se não, neste primeiro caso já tinha sido, pois testei anteriormente a 'cadastrar' e já realizei o cadastro de Ana antes. <br> Testei elas com AssertEquals como aprendi em aula nos arquivos que a professora passou inicialmente e que, depois, tivemos que fazer os códigos, então peguei aqueles códigos de exemplo. <br> E a função de editar o bolsista, edita o bolsista com tal matrícula, atualizando, neste caso, o somnete o nome da pessoa. Mas depois de corrigir o HUnit e os tipos, não tive nenhum problema com as funções do cadastro.  
 
 ---
 
@@ -245,3 +274,5 @@ Bom, antes de comecar a implementar as funções, perguntei para o claude como e
 - para "editar" listas, ou seja, uso do 'map' para criar outra lista baseada na primeira, que, na minha cabeça, funciona como uma função de editar -> https://pt.wikibooks.org/wiki/Haskell/Listas_II
 
 - material utilizado para os teste -> https://github.com/elc117/haskell01-2026a-sofiatonetto
+
+- material utilizado para ajustar a forma de declarar os tipos: https://pt.wikibooks.org/wiki/Haskell/Declaração_de_tipos
