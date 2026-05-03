@@ -246,18 +246,10 @@ Você pode comentar, por exemplo:
 - email de avaliacao da proposta com passos fornecidos pela professora;
 - material da aula 11 (06/04) sobre Scotty -> https://liascript.github.io/course/?https://raw.githubusercontent.com/AndreaInfUFSM/elc117-2026a/main/classes/11/README.md
 
-Liste referências e créditos de forma detalhada, com título e URL, incluindo, quando aplicável:
+- Página 50 e 51 para os códigos de mostrar os bolsistas e das "data Bolsistas", serviram de base para implementar os meus códigos. -> https://www.google.com/url?sa=t&source=web&rct=j&opi=89978449&url=https://www.inf.ufpr.br/andrey/ci062/ProgramacaoHaskell.pdf&ved=2ahUKEwj9gaCaop2UAxVEP7kGHerwHIsQFnoECBkQAQ&usg=AOvVaw1Jn5DlTtiu358ISgqHb2rp
 
-- sites consultados
-- documentações
-- materiais de aula
-- colegas
-- trechos de código adaptados
-- imagens, vídeos 
+- material da aula 7 para uso do map/filter e lambda -> https://liascript.github.io/course/?https://raw.githubusercontent.com/AndreaInfUFSM/elc117-2026a/main/classes/07/README.md
 
-Exemplo:
+- material da aula 8 para uso do where -> https://liascript.github.io/course/?https://raw.githubusercontent.com/AndreaInfUFSM/elc117-2026a/main/classes/08/README.md#1
 
-- Documentação do Scotty: ...
-- Documentação do Render: ...
-- Material de aula da disciplina: ...
-- Vídeo sobre Scotty: ...
+- para "editar" listas, ou seja, uso do 'map' para criar outra lista baseada na primeira, que, na minha cabeça, funciona como uma função de editar -> https://pt.wikibooks.org/wiki/Haskell/Listas_II
