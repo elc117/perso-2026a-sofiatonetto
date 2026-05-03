@@ -36,20 +36,13 @@ ALTER TABLE producao.horarios ALTER COLUMN intervalo TYPE numeric;).
 
 Na parte dos horários tive dificuldade em "Bolsistas por Pesquisa" que é a principal funcionalidade do sistema, pois precisava verificar muitas coisas e acabei me confundidno e tive que fazer várias vezes até conseguir verificar exatamente o que precisava. 
 
+Também decidi armazenar o horário como uma String e não como um Int pelo fato de ser mais fácil depois nas hora de verificar segundo meus conhecimentos. Os erros que encontrei foi na hora de declarar os tipos do cadastro mesmo, pois não tinhamos visto, mas na hora de declarar os do Horarios já estava ciente então tive erros. 
 
-- como a ideia inicial evoluiu (ok)
+Dificuldades -> HUnit, com certeza, pois no TestMyFunctions da professora já estava tudo funcionando e nesse tive que fazer do zero e para pensar para depois estruturar tudo, pois foram muitas verificações, mas fazer os testes de funcoes foi de longe a parte mais chata, não de dificuldade, mas de ser chato de fazer mesmo, nunca gostei. Mas esse trabalho me ajudou a ver como poderia usar Haskell para resolver problemas do meu dia a dia, o que não estava conseguindo perceber com as atividades de aula. Para resolver os problemas que fui encontrando eu procurava no google e aí ia buscando materiais que falavam e ia testantando mudanças para ver qual funcionava para meus cenários. 
 
-  A fazer: (tudo a partir daqui)
-- decisões tomadas ao longo do desenvolvimento
-- erros encontrados
-- dificuldades específicas enfrentadas
-- tentativas de solução
-- mudanças de rumo
-- comentários pessoais sobre o que você compreendeu no processo e sobre questões que ainda persistem
+Usei bastante as funções map e filter e o where, então agora posso dizer que consigo trabalhar bem com elas. E também entendi o main IO, pois desde a primeira vez que li isso, não conseguia entender e sempre que tentava usar dava erro, nesse trabalho e com os materiais das aulas consegui utilizar. Outra dificuldade foi trabalhar com vários filter ao mesmo tempo dentro de uma função, pois me confundi bastante, no final quase não sabia o que eu estava aplicando em cada parte e tive que refazer algumas vezes. Basicamente, resumindo, trabalhei com funções puras, de alta ordem, lambda, com composição de funções e where para as verificações. 
+
 - como você separou a lógica do serviço da parte ligada ao Scotty
-- quais funções puras e estruturas de dados foram importantes no trabalho
-- quais aspectos de programação funcional apareceram no desenvolvimento
-
 ---
 
 ## 4. Testes
@@ -89,8 +82,8 @@ e não entendi, então voltei no material e não achei nada a respeito, pesquise
       Leaving GHCi."
       <br>
 
-      
-Essa foram a funções testadas: matriculaCadastrada em que retorna True se a matrícula já foi cadastrada e False se não, neste primeiro caso já tinha sido, pois testei anteriormente a 'cadastrar' e já realizei o cadastro de Ana antes. <br> Testei elas com AssertEquals como aprendi em aula nos arquivos que a professora passou inicialmente e que, depois, tivemos que fazer os códigos, então peguei aqueles códigos de exemplo. <br> E a função de editar o bolsista, edita o bolsista com tal matrícula, atualizando, neste caso, o somnete o nome da pessoa. Mas depois de corrigir o HUnit e os tipos, não tive nenhum problema com as funções do cadastro.  
+     
+Essa foram a funções testadas no Cadastro: matriculaCadastrada em que retorna True se a matrícula já foi cadastrada e False se não, neste primeiro caso já tinha sido, pois testei anteriormente a 'cadastrar' e já realizei o cadastro de Ana antes. <br> Testei elas com AssertEquals como aprendi em aula nos arquivos que a professora passou inicialmente e que, depois, tivemos que fazer os códigos, então peguei aqueles códigos de exemplo. <br> E a função de editar o bolsista, edita o bolsista com tal matrícula, atualizando, neste caso, o somnete o nome da pessoa. Mas depois de corrigir o HUnit e os tipos, não tive nenhum problema com as funções do cadastro.  
 
 
 ---
