@@ -27,3 +27,9 @@ cadastrar bs matricula nome email linha_pesquisa horarios_livres
     Bolsistas ++ [Bolsistas matricula nome email linha_pesquisa horarios_livres]
     where
         jaCadastrado = matriculaCadastrada Bolsistas matricula
+
+editarBolsista :: [Bolsistas] -> String -> String -> [Bolsistas]
+editarBolsista Bolsistas matricula horarios_livres_editado =
+    map $ atualizaBolsista Bolsistas
+    where
+        atualizaBolsista b = b { horarios_livres = horarios_livres_editado}
