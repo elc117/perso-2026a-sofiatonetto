@@ -28,4 +28,10 @@ bolsistasPorPesquisa :: [Bolsista] -> [Horario] -> String -> String -> [String]
 bolsistasPorPesquisa bolsistas horarios diaEscala lp = map matriculaBolsista(filter horarioCompativeis horarios)
     where 
     bolsistasPesquisa = map matricula (filter (\b -> linhaPesquisa b == lp))
-    horarioCompativeis h = dia h == diaEscala && length(filter(\m -> m == matriculaBolsista h) bolsistasPesquisa) > 0 
+    horarioCompativeis h = dia h == diaEscala && length(filter(\m -> m == matriculaBolsista h) bolsistasPesquisa) > 0
+
+geraEscala :: [Horario] -> [(String, Double, Double, [String])]
+geraEscala horarios = map geraTabela horariosDefinidos 
+    where 
+    horariosDefinidos = filter(\h -> length (filter(\hh -> dia hh == dia h && horaInicio hh == horaInicio h) horarios) > 0) horarios
+    geraTabela h = (dia h, horaInicio h, intervaloFim h, horarioCompativeis horarios (dia h) (horaInicio h))
