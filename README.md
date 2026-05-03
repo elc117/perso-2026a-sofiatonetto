@@ -31,7 +31,11 @@ A primeira decisao foi no armazenamento das grades, pois a ideia seria que a pro
 
 Implementei toda a parte de cadastro, listagem e possibilidade de editar o bolsista, quando fui desenvolver a parte dos horários percebi que estava armazenando os horários errado, com o intervalo e o dia em que estão livres, então segunda livre 2h, por exeplo, mas dessa forma não saberia em qual hora do dia os bolsistas estariam livres para conseguir implementar o algoritmo de proximidade, então alterei a tabela Horarios no banco (ALTER TABLE producao.horarios ADD COLUMN hora_inicio integer not null;) para guardar o horário em que esse intervalo de trabalho começa. 
 
-Na hora dos testes das funcionalidades de cadastro, encontrei erros na parte de declarar os tipos, fui pesquisar no navegador como ajustar e resolvi. Outra decisão foi a de seperar uma página para cada coisa, pois eu estava fazendo tudo junto, já tinha declarado os tipos do Horario no arquivo de Cadastro, mas decidi separar as funcionalidades. 
+Na hora dos testes das funcionalidades de cadastro, encontrei erros na parte de declarar os tipos, fui pesquisar no navegador como ajustar e resolvi. Outra decisão foi a de seperar uma página para cada coisa, pois eu estava fazendo tudo junto, já tinha declarado os tipos do Horario no arquivo de Cadastro, mas decidi separar as funcionalidades. Outra decisao foi a forma de armazenar as horas, pois não é 1h inteira, então alterei para guardar o tempo quebrado (ALTER TABLE producao.horarios ALTER COLUMN hora_inicio TYPE numeric;
+ALTER TABLE producao.horarios ALTER COLUMN intervalo TYPE numeric;). 
+
+Na parte dos horários tive dificuldade em "Bolsistas por Pesquisa" que é a principal funcionalidade do sistema, pois precisava verificar muitas coisas e acabei me confundidno e tive que fazer várias vezes até conseguir verificar exatamente o que precisava. 
+
 
 - como a ideia inicial evoluiu (ok)
 
@@ -45,10 +49,6 @@ Na hora dos testes das funcionalidades de cadastro, encontrei erros na parte de 
 - como você separou a lógica do serviço da parte ligada ao Scotty
 - quais funções puras e estruturas de dados foram importantes no trabalho
 - quais aspectos de programação funcional apareceram no desenvolvimento
-
-Este não é um espaço para escrever algo como "foi difícil mas superei as dificuldades". O objetivo é mostrar sinais reais de desenvolvimento, reflexão, aprendizado e resolução de problemas. 
-
-Se o desenvolvimento não conseguir atingir todos os objetivos e requisitos, essa seção é muito importante para mostrar o que você tentou.
 
 ---
 
@@ -92,6 +92,7 @@ e não entendi, então voltei no material e não achei nada a respeito, pesquise
       
 Essa foram a funções testadas: matriculaCadastrada em que retorna True se a matrícula já foi cadastrada e False se não, neste primeiro caso já tinha sido, pois testei anteriormente a 'cadastrar' e já realizei o cadastro de Ana antes. <br> Testei elas com AssertEquals como aprendi em aula nos arquivos que a professora passou inicialmente e que, depois, tivemos que fazer os códigos, então peguei aqueles códigos de exemplo. <br> E a função de editar o bolsista, edita o bolsista com tal matrícula, atualizando, neste caso, o somnete o nome da pessoa. Mas depois de corrigir o HUnit e os tipos, não tive nenhum problema com as funções do cadastro.  
 
+
 ---
 
 ## 5. Execução
@@ -109,6 +110,9 @@ Descreva de forma breve como você realizou o deploy a partir da base e das orie
 ---
 
 ## 7. Resultado final
+
+Antes do resultado final quero explicar como é funciona no lab atualmente, todo inicio de semestre a professora solicita no frupo de whatsApp a grade de horários dos alunos e depois ela nos manda a tabela com nossos horários. A desse semestre está assim: <img width="250" height="500" alt="image" src="https://github.com/user-attachments/assets/39da0b7b-2014-4c82-b5fd-388383acfe92" />
+
 
 Apresente o resultado final do trabalho, na forma de GIF animado ou vídeo curto (máximo 60s)
 
@@ -278,3 +282,5 @@ Bom, antes de comecar a implementar as funções, perguntei para o claude como e
 - material utilizado para os teste -> https://github.com/elc117/haskell01-2026a-sofiatonetto
 
 - material utilizado para ajustar a forma de declarar os tipos: https://pt.wikibooks.org/wiki/Haskell/Declaração_de_tipos
+
+- material sobre cálculos para fazer a parte dos horários -> https://folivetti.github.io/courses/Haskell/Funcoes
