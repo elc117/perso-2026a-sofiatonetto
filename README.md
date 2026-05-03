@@ -44,7 +44,7 @@ Usei bastante as funções map e filter e o where, então agora posso dizer que 
 
 A maior dificuldade foi trabalhar com o banco de dados e a conexão, pois já tinha feito isso com PHP e Java, mas Haskell foi diferente, então pesquisei no navegador e não achei nenhum site, mas a IA normal do google <img width="200" height="200" alt="image" src="https://github.com/user-attachments/assets/298fac4a-dd17-44fb-9a29-3c9d384def64" /> me deu uma parte de um código e então solicitei ao claude que me ajudasse e me mostrasse o que estava faltando.  
 
-Quando fui conectar o banco percebi que tinha criado dentro do banco que uso para meus trabalhos em uma disciplina, então tive que fazer outro arquivo docker para um novo banco, pois desse jeito não estava dando certo.
+Quando fui conectar o banco percebi que tinha criado dentro do banco que uso para meus trabalhos em uma disciplina, então tive que fazer outro arquivo docker para um novo banco, pois desse jeito não estava dando certo. Fiz o código inspirada no material que o professor passou no primeiro dia de aula de banco de dados.
 
 
 - como você separou a lógica do serviço da parte ligada ao Scotty
@@ -319,3 +319,5 @@ Bom, antes de comecar a implementar as funções, perguntei para o claude como e
 - material utilizado para ajustar a forma de declarar os tipos: https://pt.wikibooks.org/wiki/Haskell/Declaração_de_tipos
 
 - material sobre cálculos para fazer a parte dos horários -> https://folivetti.github.io/courses/Haskell/Funcoes
+
+- documento com código docker do meu outro professor -> https://drive.google.com/file/d/1tL7BF0ey4KO4C--5DPMavt3DmH-rC1CT/view?usp=classroom_web&authuser=0
