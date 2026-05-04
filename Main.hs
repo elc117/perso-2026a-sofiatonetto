@@ -39,21 +39,21 @@ main = do
         ]) bolsistas)
 
     post "/bolsistas" $ do
-      mat <- param "matricula"
-      nom <- param "nome"
-      ema <- param "email"
-      lp  <- param "linhaPesquisa"
-      hl  <- param "horariosLivres"
+      mat <- formParam "matricula"
+      nom <- formParam "nome"
+      ema <- formParam "email"
+      lp  <- formParam "linhaPesquisa"
+      hl  <- formParam "horariosLivres"
       liftIO $ inserirBolsista conn (Bolsista mat nom ema lp hl)
       liftIO $ inserirHorariosDoBolsista conn mat hl
       json (object ["mensagem" .= ("Bolsista cadastrado" :: String)])
 
     post "/bolsistas/:matricula" $ do
-      mat <- param "matricula"
-      nom <- param "nome"
-      ema <- param "email"
-      lp  <- param "linhaPesquisa"
-      hl  <- param "horariosLivres"
+      mat <- formParam "matricula"
+      nom <- formParam "nome"
+      ema <- formParam "email"
+      lp  <- formParam "linhaPesquisa"
+      hl  <- formParam "horariosLivres"
       liftIO $ atualizarBolsista conn (Bolsista mat nom ema lp hl)
       liftIO $ inserirHorariosDoBolsista conn mat hl
       json (object ["mensagem" .= ("Bolsista atualizado" :: String)])
