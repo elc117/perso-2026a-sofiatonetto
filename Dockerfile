@@ -1,5 +1,9 @@
 FROM haskell:9.4
 
+RUN apt-get update && apt-get install -y \
+    libpq-dev \
+    postgresql-client
+
 WORKDIR /app
 
 COPY bolsistas.cabal ./
