@@ -1,18 +1,18 @@
-FROM haskell:9.4
-
-RUN apt-get update -o Acquire::Check-Valid-Until=false && apt-get install -y \
-    libpq-dev \
-    postgresql-client
+FROM haskell:9.8.4
 
 WORKDIR /app
 
-COPY bolsistas.cabal ./
-RUN cabal update && cabal build --only-dependencies -j4
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    libpq-dev \
+    pkg-config \
+ && rm -rf /var/lib/apt/lists/*
 
 COPY . .
-RUN cabal build -j4
-RUN cp $(cabal list-bin bolsistas) /app/bolsistas-exe
+
+RUN cabal update && \
+    cabal build && \
+    cp "$(cabal list-bin bolsistas)" /usr/local/bin/bolsistas
 
 EXPOSE 3000
 
-CMD ["/app/bolsistas-exe"]
+CMD ["bolsistas"]
