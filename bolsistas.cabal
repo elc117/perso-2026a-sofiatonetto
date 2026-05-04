@@ -10,7 +10,7 @@ executable bolsistas
     , Database
   build-depends:
       base
-    , scotty
+    , scotty >= 0.21
     , postgresql-simple
     , aeson
     , wai-extra
