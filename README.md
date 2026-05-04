@@ -153,9 +153,9 @@ Explique como executar o projeto, incluindo informações sobre dependências ne
 
 ## 6. Deploy
 
-Link do serviço publicado: <complete aqui>
+Link do serviço publicado: (https://perso-2026a-sofiatonetto.onrender.com)
 
-Descreva de forma breve como você realizou o deploy a partir da base e das orientações fornecidas. Caso não tenha conseguido, explique o que tentou.
+Fui seguindo o passo a passo do material, mas algo no meu .cabal, no Main.hs e no render.yaml não estava funcionando então tive que recorrer ao claude.ai para ele corrigir o que estava estragando. Mas criei o banco no render, depois o WebService que já reconheceu meu DockerFile. O primeiro erro foi na versão, estava usando Haskell:9.4 e demorei para perceber que o do material era o 9.8.4, na hora de copiar no meu código faltou o 8 e só percebi bem depois. Mas aí deu outro erro e foi aqui que pedi para o claude, ele me aconselhou adicionar uma flag -threaded no arquivo cabal e atualizar os paramêtros no Main.hs, porque não era mais o mesmo Scotty. Depois dessas correções conectei no terminal com os links que tem no external postgresSQL e rodei o meu código do sql para criar o schema e as tabelas no rende.
 
 ---
 
@@ -163,10 +163,11 @@ Descreva de forma breve como você realizou o deploy a partir da base e das orie
 
 Antes do resultado final quero explicar como é funciona no lab atualmente, todo inicio de semestre a professora solicita no frupo de whatsApp a grade de horários dos alunos e depois ela nos manda a tabela com nossos horários. A desse semestre está assim: <img width="250" height="500" alt="image" src="https://github.com/user-attachments/assets/39da0b7b-2014-4c82-b5fd-388383acfe92" />
 
+Gif no render: 
 
-Apresente o resultado final do trabalho, na forma de GIF animado ou vídeo curto (máximo 60s)
+<img width="654" height="410" alt="Screen Recording 2026-05-03 at 23 00 33" src="https://github.com/user-attachments/assets/8c723911-94aa-49d5-8cb4-05cb40ee9c1a" />
 
-Você também pode acrescentar uma breve explicação sobre o que está sendo demonstrado.
+Nesse gif é possível ver eu executando as funcionalidades de cadastrar bolsistas em que são inseridas as informações deles e marcados os horários em que estão LIVRES. Também consigo editar os bolsistas caso tenha algo errado ou para laterar seus horários a cada semestre. E, o mais importante, a tabela final com a escal. Então, são priorizados encaixar bolsistas em horários iguais e que estão em linhas de pesquisa, mas se não tiverem nenhum em comum, não tem o que fazer, vão cumprir as 12 horas de bolsa obrigatórias, mas se compara essa proximidade de horários e linhas de pesquisa, perceb-se que o Bruno e a Bruna tem horários parecidos e perticioam da mesma linha de pesquisa, então seus horários em comum são igualados na escala e os que não combinam, eles cumprem separadamente, não deixando de cumprir. Na parte de cadastro da Bruna, eu não dei refresh na página, por isso apareceu com os dados do Bruno já que tinha acabado de editar ele, mas não deu erro nenhum e acredito ter executado todas as funcionalidades propostas.
 
 ---
 
@@ -175,7 +176,7 @@ Você também pode acrescentar uma breve explicação sobre o que está sendo de
 ### 8.1 Ferramentas de IA utilizadas 
 
 * Gemini 3 Flash Free modo rápido; (utilizado para ajustar markdown)
-* Claude.ia Sonnet 4.6 plano pro; (utilizado para entender passo a passo e para corrigir de acordo com o padrão Haskell)
+* Claude.ia Sonnet 4.6 plano pro; (utilizado para entender passo a passo, para corrigir de acordo com o padrão Haskell, para ajuste dos erros na hora de fazer o render, pois estava dando vários erros com as versões -> não vou colocar como interação 5, pois foram mais de 2 interações até ele me dizer o que eu precisava mudar)
 
 ---
 
