@@ -88,6 +88,7 @@ A lógica foi separa, primeiramente, com tudo que era sobre o bolsista no arquiv
 Um ponto de atenção é que na proposta eu falei GET->conflitos, que representa os horários conflitantes com linha de pesquisa e intervalo, mas passei a chamar de escala, intervalo e linha de pesquisa quando comecei o código pensei na melhor forma de estruturar e programar, mas não deixei de implementar isso, apenas implementei com outro nome.
 
 Explicando as funções implementadas: 
+
     * gerEscala -> motivo pelo qual pensei em desenvolver o sistema, gera a tabela com todos horários e os bolsistas distribuídos de acordo com disponibilidade de trabalho para controle da professora.
     * intervaloFim -> para calcular a hora que o bolsista termina de trabalhar, no caso do laboratório já ficou pré definido que cada intervalo tem 2 horas (isso pode ser visto na tabela que está no Resultado Final!)
     * horasTotais -> soma todas os intervalos de horas marcados
