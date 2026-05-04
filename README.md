@@ -168,7 +168,44 @@ A parte do intervaloFim é para mostrar que o intervalo de trabalho que começa 
 
 ## 5. Execução
 
-Explique como executar o projeto, incluindo informações sobre dependências necessárias, comandos para compilar ou executar, etc.
+Precisei baixar essas dependências iniciais: 
+
+    sudo apt-get install libghc-postgresql-simple-dev
+    sudo apt-get install libghc-scotty-dev
+    sudo apt-get install libghc-wai-extra-dev
+    sudo apt-get install libghc-hunit-dev
+    sudo apt-get install libghc-split-dev
+    sudo apt-get install postgresql-client
+
+Para subir o banco e poder alterar os atibutos localmente: 
+
+    docker-compose up -d
+    psql -h localhost -p 5433 -U postgres -d lifa_hs -c "CREATE SCHEMA IF NOT EXISTS producao;"
+    psql -h localhost -p 5433 -U postgres -d lifa_hs -f producaoBD.sql
+    psql -h localhost -p 5433 -U postgres -d lifa_hs -c "ALTER TABLE producao.horarios ADD COLUMN hora_inicio integer not null DEFAULT 0;"
+    psql -h localhost -p 5433 -U postgres -d lifa_hs -c "ALTER TABLE producao.horarios ALTER COLUMN hora_inicio TYPE numeric;"
+    psql -h localhost -p 5433 -U postgres -d lifa_hs -c "ALTER TABLE producao.horarios ALTER COLUMN intervalo TYPE numeric;"
+    psql -h localhost -p 5433 -U postgres -d lifa_hs -c "DROP TABLE producao.horarios;"
+    psql -h localhost -p 5433 -U postgres -d lifa_hs -c "CREATE TABLE producao.horarios(id SERIAL PRIMARY KEY, dia text NOT NULL, hora_inicio numeric NOT NULL, intervalo numeric NOT NULL, matricula_bolsista text NOT NULL, FOREIGN KEY (matricula_bolsista) REFERENCES producao.bolsistas(matricula));
+
+Para os testes das funções cadastro e horario: 
+
+    ghci -package HUnit Cadastro.hs TestMyFunctions.hs
+    :module Main
+    main
+
+    ghci -package HUnit Cadastro.hs Horario.hs TestMyFunctionsh.hs
+    :module Main
+    main
+
+Para o servidor local: 
+
+    ghci -package postgresql-simple -package scotty -package aeson -package wai-extra -package split Cadastro.hs Horario.hs Database.hs Main.hs
+    :load Main.hs
+    main
+(nessa parte ele está diponível em http://localhost:3000)
+
+e com o deploy no render aí está no (https://perso-2026a-sofiatonetto.onrender.com)
 
 ---
 
@@ -377,7 +414,7 @@ Bom, antes de comecar a implementar as funções, perguntei para o claude como e
                               ++ filter (\(d, _) -> d == "sexta")   todosHorarios
             geraTabela (d, hi) = (d, hi, hi + 2.0, escalaBolsistas horarios d hi)
 
-  Mas ainda não estava do jeito que eu queria, pois mostrava apenas os horários que tinha bolsistas trabalhando e eu queria que mostrasse os que não tinham também, então fui alterando até conseguir chegar nisso, sozinha sem Ia nesse parte de corrigir.
+  Mas ainda não estava do jeito que eu queria, pois mostrava apenas os horários que tinha bolsistas trabalhando e eu queria que mostrasse os que não tinham também, então fui alterando até conseguir chegar nisso, sozinha sem Ia nesse parte de corrigir. Mas no fim isso nem foi utilizado!
 
 <br> Não copiei nenhum código de IA, além da parte para ajustar a tabela da escala, até porque quando solicitei a ela uma maneira de implementar, ela me deu um código muito mais complexo do que tinha visto em aula, o que não me ajudou, mas me fez buscar no navegador formas para implementar os tipos em Haskell, que não tivemos em aual, então consegui aprender algo de diferente. Mas a IA fica muito fixa em fazer códigos que não estão de acordo com meu nível de conhecimento e por mais que isso poderia ajudar, acaba atrapalhando, pois não sei muito do básico ainda então acaba sendo mais complicado de compreender o que ela gera, pois mistura muita coisa e gera coisas "do além" como o 'deriving' que não sei como funciona.
 
@@ -405,3 +442,5 @@ Bom, antes de comecar a implementar as funções, perguntei para o claude como e
 - documento com código docker do meu outro professor -> https://drive.google.com/file/d/1tL7BF0ey4KO4C--5DPMavt3DmH-rC1CT/view?usp=classroom_web&authuser=0
 
 - sobre nub -> http://www.zvon.org/other/haskell/Outputlist/nub_f.html
+
+- material sobre render -> https://github.com/elc117/demo-scotty-codespace-2026a
