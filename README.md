@@ -204,7 +204,13 @@ Para o servidor local:
     :load Main.hs
     main
 
-mas depois que fiz o deploy, rodando local fica com erros, por causa das verões
+mas depois que fiz o deploy, rodando local fica com erros, por causa das verões. Mas pesquisei e utilizando esses comandos, você consegue acessar (http://localhost:3000):
+
+    sudo apt-get install cabal-install
+    cabal update
+    cabal install scotty --lib
+    DATABASE_URL="postgresql://postgres:postgres@localhost:5433/lifa_hs" cabal run bolsistas
+
 
 e com o deploy no render aí está no (https://perso-2026a-sofiatonetto.onrender.com)
 
