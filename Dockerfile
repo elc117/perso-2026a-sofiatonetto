@@ -1,4 +1,4 @@
-FROM haskell:9.4.8-slim-bullseye
+FROM haskell:9.4.7-bullseye
 
 RUN apt-get update && apt-get install -y \
     libpq-dev \
