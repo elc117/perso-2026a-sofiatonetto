@@ -1,6 +1,6 @@
-FROM haskell:9.4.7-bullseye
+FROM haskell:9.4
 
-RUN apt-get update && apt-get install -y \
+RUN apt-get update -o Acquire::Check-Valid-Until=false && apt-get install -y \
     libpq-dev \
     postgresql-client
 
