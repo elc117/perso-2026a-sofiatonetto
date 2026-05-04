@@ -4,6 +4,10 @@ version:            0.1.0.0
 
 executable bolsistas
   main-is:          Main.hs
+  other-modules:
+      Cadastro
+    , Horario
+    , Database
   build-depends:
       base
     , scotty
