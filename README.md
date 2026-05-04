@@ -89,17 +89,17 @@ Um ponto de atenção é que na proposta eu falei GET->conflitos, que representa
 
 Explicando as funções implementadas: 
 
-    * gerEscala -> motivo pelo qual pensei em desenvolver o sistema, gera a tabela com todos horários e os bolsistas distribuídos de acordo com disponibilidade de trabalho para controle da professora.
-    * intervaloFim -> para calcular a hora que o bolsista termina de trabalhar, no caso do laboratório já ficou pré definido que cada intervalo tem 2 horas (isso pode ser visto na tabela que está no Resultado Final!)
-    * horasTotais -> soma todas os intervalos de horas marcados
-    * verificaCargaHoraria -> todos os bolsistas devem cumprir 12h semanais de trabalho no labortatório, então essa função verifica se essas 12h são veridicas.
-    * bolsistaPorPesquisa -> filtra os bolsistas da mesma linha de pesquisa e depois filtra os horários que tem em comum no dia
-    * matriculaCadastrada -> verificada se tal matrícula já foi cadastrada, isso foi feito com um filter que verifica se tem mais de 0, se tiver retorna True, pois já tem 
-    * cadastrar -> adiciona bolsista no fim da lista com o ++
-    * editarBolsista -> percorre os bolsistas para criar uma cópia do que tem a matrícula igual a que quer editar
-    * listarBolsistas -> cadas bolsista é uma String com seus dados separados por um ponto
-    * buscaPorPesquisa -> não é utilizada na Main.hs, mas para o futuro é interessante, filtra e retorna os bolsistas com linha de pesquisa buscada
-    * buscaPorMatricula -> não é utilizada na Main.hs, mas para o futuro é interessante, filtra e retorna o bolsista com matricula buscada
+* gerEscala -> motivo pelo qual pensei em desenvolver o sistema, gera a tabela com todos horários e os bolsistas distribuídos de acordo com disponibilidade de trabalho para controle da professora.
+* intervaloFim -> para calcular a hora que o bolsista termina de trabalhar, no caso do laboratório já ficou pré definido que cada intervalo tem 2 horas (isso pode ser visto na tabela que está no Resultado Final!)
+* horasTotais -> soma todas os intervalos de horas marcados
+* verificaCargaHoraria -> todos os bolsistas devem cumprir 12h semanais de trabalho no labortatório, então essa função verifica se essas 12h são veridicas.
+* bolsistaPorPesquisa -> filtra os bolsistas da mesma linha de pesquisa e depois filtra os horários que tem em comum no dia
+* matriculaCadastrada -> verificada se tal matrícula já foi cadastrada, isso foi feito com um filter que verifica se tem mais de 0, se tiver retorna True, pois já tem 
+* cadastrar -> adiciona bolsista no fim da lista com o ++
+* editarBolsista -> percorre os bolsistas para criar uma cópia do que tem a matrícula igual a que quer editar
+* listarBolsistas -> cadas bolsista é uma String com seus dados separados por um ponto
+* buscaPorPesquisa -> não é utilizada na Main.hs, mas para o futuro é interessante, filtra e retorna os bolsistas com linha de pesquisa buscada
+* buscaPorMatricula -> não é utilizada na Main.hs, mas para o futuro é interessante, filtra e retorna o bolsista com matricula buscada
     
     
 Map e filter, lambda e where foram muito utilizados para conseguir separar e verificar corretamente tudo que era necessário, separando as funções puras das com efeitos colaterais.
