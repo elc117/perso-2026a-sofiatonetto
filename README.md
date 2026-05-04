@@ -204,7 +204,7 @@ Para o servidor local:
     :load Main.hs
     main
 
-mas depois que fiz o deploy, rodando local fica com erros, por causa das verões. Mas pesquisei e utilizando esses comandos, você consegue acessar (http://localhost:3000):
+mas depois que fiz o deploy, rodando local fica com erros, por causa das verões. Mas pesquisei e utilizando esses comandos, você consegue acessar (https://ideal-funicular-q5jq5749769hr7j-3000.app.github.dev), mas tem que rodar esse comandos antes:
 
     sudo apt-get install cabal-install
     cabal update
