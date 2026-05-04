@@ -203,7 +203,8 @@ Para o servidor local:
     ghci -package postgresql-simple -package scotty -package aeson -package wai-extra -package split Cadastro.hs Horario.hs Database.hs Main.hs
     :load Main.hs
     main
-(nessa parte ele está diponível em http://localhost:3000)
+
+mas depois que fiz o deploy, rodando local fica com erros, por causa das verões
 
 e com o deploy no render aí está no (https://perso-2026a-sofiatonetto.onrender.com)
 
