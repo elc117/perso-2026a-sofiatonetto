@@ -1,6 +1,6 @@
 {
   "name": "Haskell",
-  "image": "haskell:9.4",
+  "image": "haskell:9.8.4",
   "postCreateCommand": "cabal update",
   "customizations": {
     "vscode": {
