@@ -83,6 +83,27 @@ Depois disso, fui para o Scotty, instalei com "sudo apt-get install libghc-scott
     Status: 200 OK 0.001041309s
  e na web pesquisei: https://ideal-funicular-q5jq5749769hr7j-3000.app.github.dev/bolsistas. Nessa parte ele me mostrou a bolsistas que eu tinha cadastrado antes: "[{"email":"ana@gmail.com","horariosLivres":"segunda 08:30 10:30","linhaPesquisa":"Machine Learning","matricula":"202500101","nome":"Ana"}]"
 
+A lógica foi separa, primeiramente, com tudo que era sobre o bolsista no arquivo Cadastro.hs e tudo sobre a escala no Horario.hs que, como dito desde a proposta, não tem relação com a web nem com o banco, eram testadas pelo ghci no terminal a partir dos arquivos TestMyFunctions.hs (para as do Cadastro) e TesteMyFunctionsh.hs (para as do Horario). Para relacionar com banco, o Database.hs ficou a parte que conversa com o banco do postgresSQL. O arquivo .sql tem o código inicial de criação do banco, mas depois foram feitas alterações para ficar compatível com o que eu precisava desenvolver e que foram descritas. O Main.hs tem as requisições da web. Depois tem o html, css e js, que tive que mudar do que eu já tinha feito, pois na do lab eu faço o upload da foto da grade, mas eu não consgui encontrar forma de tratar essa forma de input.
+
+Um ponto de atenção é que na proposta eu falei GET->conflitos, que representa os horários conflitantes com linha de pesquisa e intervalo, mas passei a chamar de escala, intervalo e linha de pesquisa quando comecei o código pensei na melhor forma de estruturar e programar, mas não deixei de implementar isso, apenas implementei com outro nome.
+
+Explicando as funções implementadas: 
+    * gerEscala -> motivo pelo qual pensei em desenvolver o sistema, gera a tabela com todos horários e os bolsistas distribuídos de acordo com disponibilidade de trabalho para controle da professora.
+    * intervaloFim -> para calcular a hora que o bolsista termina de trabalhar, no caso do laboratório já ficou pré definido que cada intervalo tem 2 horas (isso pode ser visto na tabela que está no Resultado Final!)
+    * horasTotais -> soma todas os intervalos de horas marcados
+    * verificaCargaHoraria -> todos os bolsistas devem cumprir 12h semanais de trabalho no labortatório, então essa função verifica se essas 12h são veridicas.
+    * bolsistaPorPesquisa -> filtra os bolsistas da mesma linha de pesquisa e depois filtra os horários que tem em comum no dia
+    * matriculaCadastrada -> verificada se tal matrícula já foi cadastrada, isso foi feito com um filter que verifica se tem mais de 0, se tiver retorna True, pois já tem 
+    * cadastrar -> adiciona bolsista no fim da lista com o ++
+    * editarBolsista -> percorre os bolsistas para criar uma cópia do que tem a matrícula igual a que quer editar
+    * listarBolsistas -> cadas bolsista é uma String com seus dados separados por um ponto
+    * buscaPorPesquisa -> não é utilizada na Main.hs, mas para o futuro é interessante, filtra e retorna os bolsistas com linha de pesquisa buscada
+    * buscaPorMatricula -> não é utilizada na Main.hs, mas para o futuro é interessante, filtra e retorna o bolsista com matricula buscada
+    
+    
+Map e filter, lambda e where foram muito utilizados para conseguir separar e verificar corretamente tudo que era necessário, separando as funções puras das com efeitos colaterais.
+Algo que eu gostaria de ter implementado, mas que também não mandei na proposta, eram os tratamentos de erros, ou seja, colocar formato para digitar tipo a verificação do cpf que vimos em aula, também algo relacionado a verificar se a pessoa cadastrou 12h exatamente.
+
 ---
 
 ## 4. Testes
@@ -147,7 +168,45 @@ A parte do intervaloFim é para mostrar que o intervalo de trabalho que começa 
 
 ## 5. Execução
 
-Explique como executar o projeto, incluindo informações sobre dependências necessárias, comandos para compilar ou executar, etc.
+Precisei baixar essas dependências iniciais: 
+
+    sudo apt-get install libghc-postgresql-simple-dev
+    sudo apt-get install libghc-scotty-dev
+    sudo apt-get install libghc-wai-extra-dev
+    sudo apt-get install libghc-hunit-dev
+    sudo apt-get install libghc-split-dev
+    sudo apt-get install postgresql-client
+
+Para subir o banco e poder alterar os atibutos localmente: 
+
+    docker-compose up -d
+    psql -h localhost -p 5433 -U postgres -d lifa_hs -c "CREATE SCHEMA IF NOT EXISTS producao;"
+    psql -h localhost -p 5433 -U postgres -d lifa_hs -f producaoBD.sql
+    psql -h localhost -p 5433 -U postgres -d lifa_hs -c "ALTER TABLE producao.horarios ADD COLUMN hora_inicio integer not null DEFAULT 0;"
+    psql -h localhost -p 5433 -U postgres -d lifa_hs -c "ALTER TABLE producao.horarios ALTER COLUMN hora_inicio TYPE numeric;"
+    psql -h localhost -p 5433 -U postgres -d lifa_hs -c "ALTER TABLE producao.horarios ALTER COLUMN intervalo TYPE numeric;"
+    psql -h localhost -p 5433 -U postgres -d lifa_hs -c "DROP TABLE producao.horarios;"
+    psql -h localhost -p 5433 -U postgres -d lifa_hs -c "CREATE TABLE producao.horarios(id SERIAL PRIMARY KEY, dia text NOT NULL, hora_inicio numeric NOT NULL, intervalo numeric NOT NULL, matricula_bolsista text NOT NULL, FOREIGN KEY (matricula_bolsista) REFERENCES producao.bolsistas(matricula));
+
+Para os testes das funções cadastro e horario: 
+
+    ghci -package HUnit Cadastro.hs TestMyFunctions.hs
+    :module Main
+    main
+
+    ghci -package HUnit Cadastro.hs Horario.hs TestMyFunctionsh.hs
+    :module Main
+    main
+
+Para o servidor local: 
+
+    ghci -package postgresql-simple -package scotty -package aeson -package wai-extra -package split Cadastro.hs Horario.hs Database.hs Main.hs
+    :load Main.hs
+    main
+
+mas depois que fiz o deploy, rodando local fica com erros, por causa das verões
+
+e com o deploy no render aí está no (https://perso-2026a-sofiatonetto.onrender.com)
 
 ---
 
@@ -356,7 +415,7 @@ Bom, antes de comecar a implementar as funções, perguntei para o claude como e
                               ++ filter (\(d, _) -> d == "sexta")   todosHorarios
             geraTabela (d, hi) = (d, hi, hi + 2.0, escalaBolsistas horarios d hi)
 
-  Mas ainda não estava do jeito que eu queria, pois mostrava apenas os horários que tinha bolsistas trabalhando e eu queria que mostrasse os que não tinham também, então fui alterando até conseguir chegar nisso, sozinha sem Ia nesse parte de corrigir.
+  Mas ainda não estava do jeito que eu queria, pois mostrava apenas os horários que tinha bolsistas trabalhando e eu queria que mostrasse os que não tinham também, então fui alterando até conseguir chegar nisso, sozinha sem Ia nesse parte de corrigir. Mas no fim isso nem foi utilizado!
 
 <br> Não copiei nenhum código de IA, além da parte para ajustar a tabela da escala, até porque quando solicitei a ela uma maneira de implementar, ela me deu um código muito mais complexo do que tinha visto em aula, o que não me ajudou, mas me fez buscar no navegador formas para implementar os tipos em Haskell, que não tivemos em aual, então consegui aprender algo de diferente. Mas a IA fica muito fixa em fazer códigos que não estão de acordo com meu nível de conhecimento e por mais que isso poderia ajudar, acaba atrapalhando, pois não sei muito do básico ainda então acaba sendo mais complicado de compreender o que ela gera, pois mistura muita coisa e gera coisas "do além" como o 'deriving' que não sei como funciona.
 
@@ -384,3 +443,5 @@ Bom, antes de comecar a implementar as funções, perguntei para o claude como e
 - documento com código docker do meu outro professor -> https://drive.google.com/file/d/1tL7BF0ey4KO4C--5DPMavt3DmH-rC1CT/view?usp=classroom_web&authuser=0
 
 - sobre nub -> http://www.zvon.org/other/haskell/Outputlist/nub_f.html
+
+- material sobre render -> https://github.com/elc117/demo-scotty-codespace-2026a
