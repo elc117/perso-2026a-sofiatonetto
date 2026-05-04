@@ -83,6 +83,27 @@ Depois disso, fui para o Scotty, instalei com "sudo apt-get install libghc-scott
     Status: 200 OK 0.001041309s
  e na web pesquisei: https://ideal-funicular-q5jq5749769hr7j-3000.app.github.dev/bolsistas. Nessa parte ele me mostrou a bolsistas que eu tinha cadastrado antes: "[{"email":"ana@gmail.com","horariosLivres":"segunda 08:30 10:30","linhaPesquisa":"Machine Learning","matricula":"202500101","nome":"Ana"}]"
 
+A lógica foi separa, primeiramente, com tudo que era sobre o bolsista no arquivo Cadastro.hs e tudo sobre a escala no Horario.hs que, como dito desde a proposta, não tem relação com a web nem com o banco, eram testadas pelo ghci no terminal a partir dos arquivos TestMyFunctions.hs (para as do Cadastro) e TesteMyFunctionsh.hs (para as do Horario). Para relacionar com banco, o Database.hs ficou a parte que conversa com o banco do postgresSQL. O arquivo .sql tem o código inicial de criação do banco, mas depois foram feitas alterações para ficar compatível com o que eu precisava desenvolver e que foram descritas. O Main.hs tem as requisições da web. Depois tem o html, css e js, que tive que mudar do que eu já tinha feito, pois na do lab eu faço o upload da foto da grade, mas eu não consgui encontrar forma de tratar essa forma de input.
+
+Um ponto de atenção é que na proposta eu falei GET->conflitos, que representa os horários conflitantes com linha de pesquisa e intervalo, mas passei a chamar de escala, intervalo e linha de pesquisa quando comecei o código pensei na melhor forma de estruturar e programar, mas não deixei de implementar isso, apenas implementei com outro nome.
+
+Explicando as funções implementadas: 
+    * gerEscala -> motivo pelo qual pensei em desenvolver o sistema, gera a tabela com todos horários e os bolsistas distribuídos de acordo com disponibilidade de trabalho para controle da professora.
+    * intervaloFim -> para calcular a hora que o bolsista termina de trabalhar, no caso do laboratório já ficou pré definido que cada intervalo tem 2 horas (isso pode ser visto na tabela que está no Resultado Final!)
+    * horasTotais -> soma todas os intervalos de horas marcados
+    * verificaCargaHoraria -> todos os bolsistas devem cumprir 12h semanais de trabalho no labortatório, então essa função verifica se essas 12h são veridicas.
+    * bolsistaPorPesquisa -> filtra os bolsistas da mesma linha de pesquisa e depois filtra os horários que tem em comum no dia
+    * matriculaCadastrada -> verificada se tal matrícula já foi cadastrada, isso foi feito com um filter que verifica se tem mais de 0, se tiver retorna True, pois já tem 
+    * cadastrar -> adiciona bolsista no fim da lista com o ++
+    * editarBolsista -> percorre os bolsistas para criar uma cópia do que tem a matrícula igual a que quer editar
+    * listarBolsistas -> cadas bolsista é uma String com seus dados separados por um ponto
+    * buscaPorPesquisa -> não é utilizada na Main.hs, mas para o futuro é interessante, filtra e retorna os bolsistas com linha de pesquisa buscada
+    * buscaPorMatricula -> não é utilizada na Main.hs, mas para o futuro é interessante, filtra e retorna o bolsista com matricula buscada
+    
+    
+Map e filter, lambda e where foram muito utilizados para conseguir separar e verificar corretamente tudo que era necessário, separando as funções puras das com efeitos colaterais.
+Algo que eu gostaria de ter implementado, mas que também não mandei na proposta, eram os tratamentos de erros, ou seja, colocar formato para digitar tipo a verificação do cpf que vimos em aula, também algo relacionado a verificar se a pessoa cadastrou 12h exatamente.
+
 ---
 
 ## 4. Testes
