@@ -163,12 +163,11 @@ Fui seguindo o passo a passo do material, mas algo no meu .cabal, no Main.hs e n
 
 Antes do resultado final quero explicar como é funciona no lab atualmente, todo inicio de semestre a professora solicita no frupo de whatsApp a grade de horários dos alunos e depois ela nos manda a tabela com nossos horários. A desse semestre está assim: <img width="250" height="500" alt="image" src="https://github.com/user-attachments/assets/39da0b7b-2014-4c82-b5fd-388383acfe92" />
 
-Gif no render: <img width="654" height="410" alt="Screen Recording 2026-05-03 at 23 00 33" src="https://github.com/user-attachments/assets/8c723911-94aa-49d5-8cb4-05cb40ee9c1a" />
+Gif no render: 
 
+<img width="654" height="410" alt="Screen Recording 2026-05-03 at 23 00 33" src="https://github.com/user-attachments/assets/8c723911-94aa-49d5-8cb4-05cb40ee9c1a" />
 
-Apresente o resultado final do trabalho, na forma de GIF animado ou vídeo curto (máximo 60s)
-
-Você também pode acrescentar uma breve explicação sobre o que está sendo demonstrado.
+Nesse gif é possível ver eu executando as funcionalidades de cadastrar bolsistas em que são inseridas as informações deles e marcados os horários em que estão LIVRES. Também consigo editar os bolsistas caso tenha algo errado ou para laterar seus horários a cada semestre. E, o mais importante, a tabela final com a escal. Então, são priorizados encaixar bolsistas em horários iguais e que estão em linhas de pesquisa, mas se não tiverem nenhum em comum, não tem o que fazer, vão cumprir as 12 horas de bolsa obrigatórias, mas se compara essa proximidade de horários e linhas de pesquisa, perceb-se que o Bruno e a Bruna tem horários parecidos e perticioam da mesma linha de pesquisa, então seus horários em comum são igualados na escala e os que não combinam, eles cumprem separadamente, não deixando de cumprir. Na parte de cadastro da Bruna, eu não dei refresh na página, por isso apareceu com os dados do Bruno já que tinha acabado de editar ele, mas não deu erro nenhum e acredito ter executado todas as funcionalidades propostas.
 
 ---
 
